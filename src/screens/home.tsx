@@ -1,5 +1,8 @@
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
+import SignIn from "./signIn";
+
+
 import {
   Dimensions,
   Image, ImageBackground,
@@ -30,8 +33,9 @@ const HomeScreen = () => {
           <TouchableOpacity><Text style={styles.navLink}>Home</Text></TouchableOpacity>
           <TouchableOpacity><Text style={styles.navLink}>Categories</Text></TouchableOpacity>
           <TouchableOpacity><Text style={styles.navLink}>About Us</Text></TouchableOpacity>
-          <TouchableOpacity><Text style={styles.navLink}>Sign In</Text></TouchableOpacity>
-          
+<View style={{ marginLeft: 20, justifyContent: "center" }}>
+  <SignIn />
+</View>        
           {/* Cart Icon at the end */}
           <TouchableOpacity style={{marginLeft: 20}}>
             <Ionicons name="cart-outline" size={24} color="white" />
@@ -106,14 +110,17 @@ const styles = StyleSheet.create({
 
   // Header Styles
   header: {
-    backgroundColor: '#F36D00', // Original Chhayakart Orange
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingTop: 45, // Safe area for mobile
-    paddingBottom: 15,
-    justifyContent: 'space-between',
-  },
+  backgroundColor: '#F36D00',
+  flexDirection: 'row',
+  alignItems: 'center',
+  paddingHorizontal: 20,
+  paddingTop: 45,
+  paddingBottom: 15,
+  justifyContent: 'space-between',
+
+  zIndex: 1000,      // 👈 add karo
+  elevation: 10,     // 👈 Android ke liye
+},
   logo: {
     width: 45,
     height: 45,
