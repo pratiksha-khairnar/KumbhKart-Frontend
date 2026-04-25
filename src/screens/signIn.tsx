@@ -1,66 +1,90 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  Modal,
-  Pressable,
+  View, Text, TouchableOpacity,
+  StyleSheet, Modal, Pressable,
 } from "react-native";
+import { useRouter, usePathname } from "expo-router";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const SignIn = () => {
   const [open, setOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
+
+  // Har baar screen pe aao — login check karo
+  useEffect(() => {
+    checkLogin();
+  }, [pathname]);
+
+  const checkLogin = async () => {
+    const val = await AsyncStorage.getItem('isLoggedIn');
+    setIsLoggedIn(val === 'true');
+  };
 
   return (
     <View style={styles.wrapper}>
 
-      {/* Navbar Sign In Button */}
+      {/* Navbar button */}
       <TouchableOpacity onPress={() => setOpen(true)}>
-        <Text style={styles.signInText}>Sign In ▾</Text>
+        <Text style={styles.signInText}>
+          {isLoggedIn ? 'Hello 👋 ▾' : 'Sign In ▾'}
+        </Text>
       </TouchableOpacity>
 
-      {/* Modal — bahar click karne pe band hogi */}
+      {/* Dropdown Modal */}
       <Modal
-        transparent={true}
-        visible={open}
+        transparent visible={open}
         animationType="fade"
         onRequestClose={() => setOpen(false)}
       >
-        {/* Background press to close */}
         <Pressable style={styles.overlay} onPress={() => setOpen(false)} />
 
-        {/* Dropdown Box */}
         <View style={styles.dropdown}>
 
-          {/* Orange Sign In Button */}
-          <TouchableOpacity style={styles.mainBtn} onPress={() => setOpen(false)}>
-            <Text style={styles.mainBtnText}>Sign In</Text>
-          </TouchableOpacity>
+          {/* agar logged in nahi hai toh Sign In button dikhe */}
+          {/* agar logged in hai toh Hello dikhe */}
+          {isLoggedIn ? (
+            <View style={styles.helloBox}>
+              <Text style={styles.helloText}>Hello 👋</Text>
+              <Text style={styles.helloSubText}>Welcome back!</Text>
+            </View>
+          ) : (
+            <TouchableOpacity
+              style={styles.mainBtn}
+              onPress={() => {
+                setOpen(false);
+                router.push('/signIn');
+              }}
+            >
+              <Text style={styles.mainBtnText}>Sign In</Text>
+            </TouchableOpacity>
+          )}
 
-          <Text style={styles.divider} />
+          <View style={styles.dividerLine} />
 
-          <TouchableOpacity onPress={() => setOpen(false)}>
-            <Text style={styles.item}>Home</Text>
-          </TouchableOpacity>
+          <Text style={styles.item}>Home</Text>
+          <Text style={styles.item}>My Orders</Text>
+          <Text style={styles.item}>My Wishlist</Text>
+          <Text style={styles.item}>
+            Chhaya Purse{' '}
+            <Text style={styles.coming}>( Coming Soon )</Text>
+          </Text>
+          <Text style={styles.item}>CK Wholesale</Text>
 
-          <TouchableOpacity onPress={() => setOpen(false)}>
-            <Text style={styles.item}>My Orders</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={() => setOpen(false)}>
-            <Text style={styles.item}>My Wishlist</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={() => setOpen(false)}>
-            <Text style={styles.item}>
-              Chhaya Purse{" "}
-              <Text style={styles.coming}>( Coming Soon )</Text>
-            </Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={() => setOpen(false)}>
-            <Text style={styles.item}>CK Wholesale</Text>
-          </TouchableOpacity>
+          {/* Logout button — sirf logged in hone pe dikhe */}
+          {isLoggedIn && (
+            <TouchableOpacity
+              style={styles.logoutBtn}
+              onPress={async () => {
+                await AsyncStorage.removeItem('isLoggedIn');
+                setIsLoggedIn(false);
+                setOpen(false);
+              }}
+            >
+              <Text style={styles.logoutText}>Logout</Text>
+            </TouchableOpacity>
+          )}
 
         </View>
       </Modal>
@@ -71,26 +95,25 @@ const SignIn = () => {
 
 export default SignIn;
 
+const ORANGE = '#F36D00';
+
 const styles = StyleSheet.create({
-  wrapper: {
-    justifyContent: "center",
-  },
+  wrapper: { justifyContent: "center" },
+
   signInText: {
     color: "white",
     fontSize: 13,
     fontWeight: "500",
   },
 
-  // Full screen transparent background
   overlay: {
     flex: 1,
     backgroundColor: "transparent",
   },
 
-  // Dropdown box — top right position
   dropdown: {
     position: "absolute",
-    top: 95,        // header height ke baad
+    top: 95,
     right: 10,
     width: 220,
     backgroundColor: "white",
@@ -103,8 +126,9 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
   },
 
+  // Sign In Button
   mainBtn: {
-    backgroundColor: "#F36D00",
+    backgroundColor: ORANGE,
     padding: 12,
     borderRadius: 8,
     marginBottom: 8,
@@ -116,23 +140,57 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
 
-  divider: {
+  // Hello Box — logged in hone pe
+  helloBox: {
+    backgroundColor: '#fff5ee',
+    padding: 12,
+    borderRadius: 8,
+    marginBottom: 8,
+    alignItems: 'center',
+  },
+  helloText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: ORANGE,
+  },
+  helloSubText: {
+    fontSize: 12,
+    color: '#888',
+    marginTop: 2,
+  },
+
+  dividerLine: {
     height: 1,
-    backgroundColor: "#eee",
-    marginVertical: 6,
+    backgroundColor: '#eee',
+    marginBottom: 6,
   },
 
   item: {
     paddingVertical: 10,
     paddingHorizontal: 5,
     fontSize: 14,
-    color: "#333",
+    color: '#333',
     borderBottomWidth: 1,
-    borderBottomColor: "#f0f0f0",
+    borderBottomColor: '#f0f0f0',
   },
 
   coming: {
-    color: "#F36D00",
+    color: ORANGE,
     fontSize: 12,
+  },
+
+  // Logout Button
+  logoutBtn: {
+    marginTop: 10,
+    padding: 10,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#ffccaa',
+    alignItems: 'center',
+  },
+  logoutText: {
+    color: ORANGE,
+    fontWeight: 'bold',
+    fontSize: 14,
   },
 });
