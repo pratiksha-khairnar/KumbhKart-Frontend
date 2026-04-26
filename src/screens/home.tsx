@@ -1,4 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';  // ✅ useRouter hook use karo
 import React from 'react';
 import {
   Dimensions,
@@ -14,29 +15,44 @@ import {
 const { width } = Dimensions.get('window');
 
 const HomeScreen = () => {
+  const router = useRouter(); // ✅ Component ke andar call karo
+
   return (
     <ScrollView style={styles.container}>
       
       {/* 1. HEADER (Logo on Left, Links on Right) */}
       <View style={styles.header}>
+
         {/* Logo Section */}
         <Image 
           source={{ uri: 'https://www.chhayakart.com/cdn/shop/files/ck_logo_white_1.png' }} 
           style={styles.logo} 
         />
 
-        {/* Navigation Links (Shifted to Right) */}
+        {/* Nav Links */}
         <View style={styles.navLinksContainer}>
-          <TouchableOpacity><Text style={styles.navLink}>Home</Text></TouchableOpacity>
-          <TouchableOpacity><Text style={styles.navLink}>Categories</Text></TouchableOpacity>
-          <TouchableOpacity><Text style={styles.navLink}>About Us</Text></TouchableOpacity>
-          <TouchableOpacity><Text style={styles.navLink}>Sign In</Text></TouchableOpacity>
-          
-          {/* Cart Icon at the end */}
-          <TouchableOpacity style={{marginLeft: 20}}>
-            <Ionicons name="cart-outline" size={24} color="white" />
+          <TouchableOpacity onPress={() => router.push('/')}>
+            <Text style={styles.navLink}>Home</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => router.push('/sub-category/31-papad')}>
+            <Text style={styles.navLink}>Categories</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => router.push('/about')}>
+            <Text style={styles.navLink}>About Us</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => router.push('/signin')}>
+            <Text style={styles.navLink}>Sign In</Text>
           </TouchableOpacity>
         </View>
+
+        {/* Cart Icon */}
+        <TouchableOpacity style={{ marginLeft: 20 }}>
+          <Ionicons name="cart-outline" size={24} color="white" />
+        </TouchableOpacity>
+
       </View>
 
       {/* 2. HERO SECTION (Banner with Search) */}
@@ -49,7 +65,7 @@ const HomeScreen = () => {
             Self-Help Groups, Women Entrepreneurs & Rural Manufacturers Products
           </Text>
 
-          {/* Search Bar matching the image */}
+          {/* Search Bar */}
           <View style={styles.searchBarContainer}>
             <View style={styles.dropdownBox}>
               <Text style={styles.dropdownText}>All India</Text>
@@ -78,19 +94,23 @@ const HomeScreen = () => {
 
         <View style={styles.categoryGrid}>
           {[
-            { id: 1, title: 'PAPAD', img: 'https://www.chhayakart.com/cdn/shop/files/papad.png' },
+            { id: 1, title: 'PAPAD',    img: 'https://www.chhayakart.com/cdn/shop/files/papad.png' },
             { id: 2, title: 'SEASONAL', img: 'https://www.chhayakart.com/cdn/shop/files/seasonal.png' },
-            { id: 3, title: 'INSTANT', img: 'https://www.chhayakart.com/cdn/shop/files/instant.png' },
-            { id: 4, title: 'PUJA', img: 'https://www.chhayakart.com/cdn/shop/files/puja.png' },
-            { id: 5, title: 'MILLET', img: 'https://www.chhayakart.com/cdn/shop/files/millet.png' },
-            { id: 6, title: 'SNACKS', img: 'https://www.chhayakart.com/cdn/shop/files/snacks.png' },
+            { id: 3, title: 'INSTANT',  img: 'https://www.chhayakart.com/cdn/shop/files/instant.png' },
+            { id: 4, title: 'PUJA',     img: 'https://www.chhayakart.com/cdn/shop/files/puja.png' },
+            { id: 5, title: 'MILLET',   img: 'https://www.chhayakart.com/cdn/shop/files/millet.png' },
+            { id: 6, title: 'SNACKS',   img: 'https://www.chhayakart.com/cdn/shop/files/snacks.png' },
           ].map((item) => (
-            <View key={item.id} style={styles.categoryCard}>
+            <TouchableOpacity
+              key={item.id}
+              style={styles.categoryCard}
+              onPress={() => router.push(`/sub-category/${item.id}-${item.title.toLowerCase()}`)}
+            >
               <View style={styles.imageBox}>
-                 <Image source={{ uri: item.img }} style={styles.categoryImage} />
+                <Image source={{ uri: item.img }} style={styles.categoryImage} />
               </View>
               <Text style={styles.categoryTitle}>{item.title}</Text>
-            </View>
+            </TouchableOpacity>
           ))}
         </View>
       </View>
@@ -104,13 +124,13 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#fff' },
 
-  // Header Styles
+  // Header
   header: {
-    backgroundColor: '#F36D00', // Original Chhayakart Orange
+    backgroundColor: '#F36D00',
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 20,
-    paddingTop: 45, // Safe area for mobile
+    paddingTop: 45,
     paddingBottom: 15,
     justifyContent: 'space-between',
   },
@@ -123,13 +143,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     flex: 1,
-    justifyContent: 'flex-end', // Ye links ko RIGHT side mein shift karega
+    justifyContent: 'flex-end',
   },
   navLink: {
     color: 'white',
     fontSize: 13,
     fontWeight: '500',
-    marginLeft: 20, // Links ke beech ka gap
+    marginLeft: 20,
   },
 
   // Hero Section
@@ -139,7 +159,7 @@ const styles = StyleSheet.create({
   },
   heroOverlay: {
     flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.3)', // Dark overlay taaki text dikhe
+    backgroundColor: 'rgba(0,0,0,0.3)',
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 15,
@@ -189,7 +209,7 @@ const styles = StyleSheet.create({
   },
   deliveryText: { color: 'white', fontWeight: '700', fontSize: 14 },
 
-  // Category Grid
+  // Category Section
   categorySection: { padding: 20 },
   categoryHeading: { fontSize: 18, fontWeight: '500', color: '#333' },
   headingUnderline: { height: 1, backgroundColor: '#ddd', marginTop: 8, marginBottom: 20 },
@@ -199,13 +219,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   categoryCard: {
-    width: '31%', // Ek row mein 3 cards
+    width: '31%',
     alignItems: 'center',
     marginBottom: 20,
   },
   imageBox: {
     width: '100%',
-    aspectRatio: 1, // Square box
+    aspectRatio: 1,
     borderWidth: 1,
     borderColor: '#eee',
     justifyContent: 'center',
