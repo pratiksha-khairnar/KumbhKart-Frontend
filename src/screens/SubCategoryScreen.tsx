@@ -1,6 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   FlatList,
   Image,
@@ -10,9 +10,21 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Modal,
+  Pressable,
 } from 'react-native';
 
 const TABS = ['PAPAD', 'KURDAI', 'SEVIYAN', 'UPWAS Papad'];
+
+// ✅ About Dropdown Items (Same as HomeScreen)
+const ABOUT_DROPDOWN = [
+  { label: 'About Us',           route: '/about' },
+  { label: 'Blog',               route: '/blog' },
+  { label: 'Contact Us',         route: '/contact' },
+  { label: 'Terms & Conditions', route: '/terms' },
+  { label: 'Privacy Policy',     route: '/privacy' },
+  { label: 'Return & Refund',    route: '/refund' },
+];
 
 const PRODUCTS = [
   {
@@ -75,6 +87,11 @@ export default function SubCategoryScreen({ categoryId }: { categoryId: any }) {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState('PAPAD');
   const [wishlist, setWishlist] = useState<string[]>([]);
+  
+  // ✅ Dropdown State
+  const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [btnLayout, setBtnLayout] = useState({ x: 0, y: 0, width: 0, height: 0 });
+  const aboutBtnRef = useRef<View>(null);
 
   const toggleWish = (id: string) => {
     setWishlist(prev =>
@@ -82,7 +99,17 @@ export default function SubCategoryScreen({ categoryId }: { categoryId: any }) {
     );
   };
 
-  // ✅ Horizontal card — Image LEFT, Info RIGHT (like Image 1)
+  // ✅ Open Dropdown Function
+  const openDropdown = () => {
+    if (aboutBtnRef.current) {
+      aboutBtnRef.current.measure((_fx, _fy, width, height, px, py) => {
+        setBtnLayout({ x: px, y: py, width, height });
+        setDropdownVisible(true);
+      });
+    }
+  };
+
+  // Horizontal card — Image LEFT, Info RIGHT
   const renderProduct = ({ item }: any) => (
     <View style={styles.card}>
 
@@ -128,7 +155,7 @@ export default function SubCategoryScreen({ categoryId }: { categoryId: any }) {
     <View style={styles.container}>
 
       {/* ============================== */}
-      {/* SECTION 1 — NAVBAR            */}
+      {/* SECTION 1 — NAVBAR with DROPDOWN */}
       {/* ============================== */}
       <View style={styles.header}>
         <Image
@@ -140,20 +167,66 @@ export default function SubCategoryScreen({ categoryId }: { categoryId: any }) {
           <TouchableOpacity style={styles.navItem} onPress={() => router.push('/')}>
             <Text style={styles.navLink}>Home</Text>
           </TouchableOpacity>
+          
           <TouchableOpacity style={styles.navItem} onPress={() => router.push('/sub-category/31-papad')}>
             <Text style={styles.navLink}>Categories</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.navItem}>
-            <Text style={styles.navLink}>About Us</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.navItem}>
+          
+          {/* ✅ About Us — Dropdown trigger */}
+          <View ref={aboutBtnRef} collapsable={false}>
+            <TouchableOpacity style={styles.aboutBtn} onPress={openDropdown}>
+              <Text style={styles.navLink}>About Us</Text>
+              <Ionicons
+                name={dropdownVisible ? 'chevron-up' : 'chevron-down'}
+                size={13}
+                color="white"
+                style={{ marginLeft: 4 }}
+              />
+            </TouchableOpacity>
+          </View>
+          
+          <TouchableOpacity style={styles.navItem} onPress={() => router.push('/signin')}>
             <Text style={styles.navLink}>Sign In</Text>
           </TouchableOpacity>
+          
           <TouchableOpacity style={styles.cartBtn}>
             <Ionicons name="cart" size={26} color="#000" />
           </TouchableOpacity>
         </View>
       </View>
+
+      {/* ✅ DROPDOWN MODAL */}
+      <Modal
+        visible={dropdownVisible}
+        transparent
+        animationType="fade"
+        onRequestClose={() => setDropdownVisible(false)}
+      >
+        <Pressable style={styles.backdrop} onPress={() => setDropdownVisible(false)}>
+          <View
+            style={[
+              styles.dropdownMenu,
+              { top: btnLayout.y + btnLayout.height + 4, left: btnLayout.x },
+            ]}
+          >
+            {ABOUT_DROPDOWN.map((item, index) => (
+              <TouchableOpacity
+                key={item.label}
+                style={[
+                  styles.dropdownItem,
+                  index < ABOUT_DROPDOWN.length - 1 && styles.dropdownBorder,
+                ]}
+                onPress={() => {
+                  setDropdownVisible(false);
+                  router.push(item.route as any);
+                }}
+              >
+                <Text style={styles.dropdownText}>{item.label}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        </Pressable>
+      </Modal>
 
       <View style={styles.sectionGap} />
 
@@ -184,7 +257,6 @@ export default function SubCategoryScreen({ categoryId }: { categoryId: any }) {
 
       {/* ============================== */}
       {/* SECTION 3 — PRODUCT LIST      */}
-      {/* Image LEFT + Info RIGHT        */}
       {/* ============================== */}
       <FlatList
         data={PRODUCTS}
@@ -208,7 +280,7 @@ const styles = StyleSheet.create({
 
   /* ---- NAVBAR ---- */
   header: {
-    backgroundColor: '#F36D00',
+    backgroundColor: '#db1c07', // ✅ Deep Red (was #F36D00 Orange)
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 32,
@@ -229,12 +301,44 @@ const styles = StyleSheet.create({
   },
   navItem: { paddingHorizontal: 18, paddingVertical: 8 },
   navLink: { color: 'white', fontSize: 15, fontWeight: '600', letterSpacing: 0.4 },
+  
+  // ✅ About Us Button with Dropdown
+  aboutBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginLeft: 18,
+  },
+  
   cartBtn: {
     marginLeft: 24,
     backgroundColor: 'rgba(255,255,255,0.25)',
     borderRadius: 50,
     padding: 8,
   },
+
+  /* ✅ DROPDOWN STYLES */
+  backdrop: { flex: 1, backgroundColor: 'transparent' },
+  dropdownMenu: {
+    position: 'absolute',
+    width: 210,
+    backgroundColor: '#fff',
+    borderRadius: 8,
+    shadowColor: '#000',
+    shadowOpacity: 0.18,
+    shadowRadius: 10,
+    elevation: 12,
+    overflow: 'hidden',
+    borderWidth: 1,
+    borderColor: '#f0f0f0',
+    zIndex: 1000,
+  },
+  dropdownItem: {
+    paddingVertical: 14,
+    paddingHorizontal: 20,
+    backgroundColor: '#fff',
+  },
+  dropdownBorder: { borderBottomWidth: 1, borderBottomColor: '#f0f0f0' },
+  dropdownText: { fontSize: 14, color: '#333', fontWeight: '500' },
 
   /* ---- TABS ---- */
   tabsSection: {
@@ -258,24 +362,24 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 1.5,
-    borderColor: '#F36D00',
+    borderColor: '#db1c07', // ✅ Deep Red (was #F36D00)
     borderRadius: 6,
     backgroundColor: '#fff',
   },
   tabBtnActive: {
-    backgroundColor: '#F36D00',
-    borderColor: '#F36D00',
+    backgroundColor: '#db1c07', // ✅ Deep Red (was #F36D00)
+    borderColor: '#db1c07',
   },
   tabBtnText: {
     fontSize: 13,
     fontWeight: '700',
-    color: '#F36D00',
+    color: '#db1c07', // ✅ Deep Red (was #F36D00)
     letterSpacing: 0.8,
     textTransform: 'uppercase',
   },
   tabBtnTextActive: { color: '#ffffff' },
 
-  /* ---- PRODUCT CARDS (Horizontal Layout) ---- */
+  /* ---- PRODUCT CARDS ---- */
   grid: { padding: 10 },
 
   card: {
@@ -284,7 +388,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 10,
     overflow: 'hidden',
-    flexDirection: 'row',      // ✅ Image LEFT, Info RIGHT
+    flexDirection: 'row',
     shadowColor: '#000',
     shadowOpacity: 0.08,
     shadowRadius: 5,
@@ -292,14 +396,12 @@ const styles = StyleSheet.create({
     minHeight: 180,
   },
 
-  // LEFT — Food Image (square)
   productImage: {
-    width: 140,                // ✅ Fixed image width
-    height: '100%',            // ✅ Full card height
+    width: 100,
+    height: '100%',
     backgroundColor: '#f5f5f5',
   },
 
-  // RIGHT — Info Section
   cardInfo: {
     flex: 1,
     padding: 10,
@@ -329,10 +431,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   addBtn: {
-    backgroundColor: '#F9C49E',
+    backgroundColor: '#db1c07', // ✅ Deep Red (was #F9C49E)
     paddingVertical: 6,
     paddingHorizontal: 20,
     borderRadius: 4,
   },
-  addText: { color: '#333', fontWeight: '700', fontSize: 13 },
+  addText: { color: '#fff', fontWeight: '700', fontSize: 13 }, // ✅ Changed to white
 });
