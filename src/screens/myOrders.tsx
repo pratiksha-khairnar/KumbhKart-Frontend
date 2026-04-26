@@ -1,46 +1,46 @@
 import React, { useEffect, useState } from 'react';
 import {
   View, Text, TouchableOpacity, StyleSheet,
-  SafeAreaView, Alert, ActivityIndicator,
+  SafeAreaView, ActivityIndicator, Modal, TextInput
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Ionicons } from '@expo/vector-icons';
 
 export default function MyOrders() {
-  const router = useRouter();
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
 
+  const router = useRouter();
+
+  // ===== STATE =====
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
+  const [activeMenu, setActiveMenu] = useState('All Orders');
+
+  const [modalVisible, setModalVisible] = useState(false);
+
+  // No default data
+  const [addresses, setAddresses] = useState([]);
+  const [transactions, setTransactions] = useState([]);
+
+  // ===== CHECK LOGIN =====
   useEffect(() => {
     checkLogin();
   }, []);
 
   const checkLogin = async () => {
     const val = await AsyncStorage.getItem('isLoggedIn');
-    if (val !== 'true') {
-      // Login nahi hai — alert dikho
-      Alert.alert(
-        'Sign In Required',
-        'My Orders dekhne ke liye pehle Sign In karo!',
-        [
-          {
-            text: 'Sign In',
-            onPress: () => router.replace('/'),
-          },
-          {
-            text: 'Cancel',
-            onPress: () => router.back(),
-            style: 'cancel',
-          },
-        ]
-      );
-      setIsLoggedIn(false);
-    } else {
-      setIsLoggedIn(true);
-    }
+    setIsLoggedIn(val === 'true');
   };
 
-  // Loading state
+  // ===== MENU =====
+  const menuItems = [
+    { icon: 'list-outline', label: 'All Orders' },
+    { icon: 'person-outline', label: 'My Profile' },
+    { icon: 'home-outline', label: 'Manage Address' },
+    { icon: 'receipt-outline', label: 'Transaction History' },
+    { icon: 'log-out-outline', label: 'Logout' },
+  ];
+
+  // ===== LOADING =====
   if (isLoggedIn === null) {
     return (
       <View style={styles.loadingBox}>
@@ -49,16 +49,14 @@ export default function MyOrders() {
     );
   }
 
-  // Not logged in
+  // ===== NOT LOGGED IN =====
   if (!isLoggedIn) {
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.notLoggedBox}>
           <Ionicons name="lock-closed-outline" size={60} color="#F36D00" />
-          <Text style={styles.notLoggedText}>Sign In Required!</Text>
-          <Text style={styles.notLoggedSub}>
-            My Orders dekhne ke liye pehle Sign In karo
-          </Text>
+          <Text style={styles.notLoggedText}>Sign In Required</Text>
+
           <TouchableOpacity
             style={styles.signInBtn}
             onPress={() => router.replace('/')}
@@ -70,135 +68,313 @@ export default function MyOrders() {
     );
   }
 
-  // Logged in — Orders page
   return (
     <SafeAreaView style={styles.container}>
 
-      {/* Header */}
+      {/* HEADER */}
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.back()} style={styles.backBtn}>
-          <Ionicons name="arrow-back" size={22} color="white" />
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>My Orders</Text>
+        
+        <Text style={styles.headerTitle}>My Account</Text>
       </View>
 
-      {/* Body */}
+      {/* BODY */}
       <View style={styles.body}>
 
-        {/* Sidebar */}
+        {/* SIDEBAR */}
         <View style={styles.sidebar}>
+          <Text style={styles.sidebarTitle}>My Account</Text>
 
-          {/* Profile Icon */}
-          <View style={styles.profileIcon}>
-            <Ionicons name="person-circle" size={60} color="#aaa" />
-            <TouchableOpacity style={styles.editIcon}>
-              <Ionicons name="pencil" size={12} color="white" />
-            </TouchableOpacity>
-          </View>
-
-          {/* Menu Items */}
-          {[
-            { icon: 'list-outline', label: 'All Orders', active: true },
-            { icon: 'person-outline', label: 'My Profile', active: false },
-            { icon: 'home-outline', label: 'Manage Address', active: false },
-            { icon: 'receipt-outline', label: 'Transaction History', active: false },
-            { icon: 'log-out-outline', label: 'Logout', active: false },
-          ].map((item, index) => (
+          {menuItems.map((item, index) => (
             <TouchableOpacity
               key={index}
-              style={styles.menuItem}
-              onPress={async () => {
+              style={[
+                styles.menuItem,
+                activeMenu === item.label && styles.activeMenuItem
+              ]}
+              onPress={() => {
+                setActiveMenu(item.label);
+
                 if (item.label === 'Logout') {
-                  await AsyncStorage.removeItem('isLoggedIn');
-                  router.replace('/');
+                  setModalVisible(true);
                 }
               }}
             >
               <Ionicons
                 name={item.icon as any}
                 size={18}
-                color={item.active ? '#2ecc71' : '#555'}
+                color={activeMenu === item.label ? '#F36D00' : '#555'}
               />
-              <Text style={[styles.menuLabel, item.active && styles.menuLabelActive]}>
+              <Text
+                style={[
+                  styles.menuLabel,
+                  activeMenu === item.label && styles.activeMenuLabel
+                ]}
+              >
                 {item.label}
               </Text>
-              <Ionicons name="chevron-forward" size={16} color="#aaa" style={styles.menuArrow} />
             </TouchableOpacity>
           ))}
         </View>
 
-        {/* Main Content */}
+        {/* MAIN CONTENT */}
         <View style={styles.mainContent}>
-          <Text style={styles.contentTitle}>ALL ORDERS</Text>
-          <View style={styles.divider} />
+          <View style={styles.card}>
 
-          {/* Empty State */}
-          <View style={styles.emptyBox}>
-            <Ionicons name="bag-outline" size={50} color="#ddd" />
-            <Text style={styles.emptyText}>Koi orders nahi hain abhi</Text>
+            {/* ===== ALL ORDERS ===== */}
+            {activeMenu === 'All Orders' && (
+              <>
+                <Text style={styles.pageTitle}>My Orders</Text>
+                <View style={styles.divider} />
+
+                <View style={styles.emptyBox}>
+                  <Ionicons name="bag-outline" size={60} color="#ddd" />
+                  <Text style={styles.emptyTitle}>No Orders Yet</Text>
+                  <Text style={styles.emptySub}>
+                    Your orders will appear here
+                  </Text>
+                </View>
+              </>
+            )}
+
+            {/* ===== MY PROFILE ===== */}
+            {activeMenu === 'My Profile' && (
+              <>
+                <Text style={styles.pageTitle}>My Profile</Text>
+                <View style={styles.divider} />
+
+                <Text style={styles.inputLabel}>Full Name</Text>
+                <TextInput style={styles.input} placeholder="Enter name" />
+
+                <Text style={styles.inputLabel}>Phone</Text>
+                <TextInput style={styles.input} placeholder="+91 XXXXXXXX" />
+
+                <Text style={styles.inputLabel}>Email</Text>
+                <TextInput style={styles.input} placeholder="Enter email" />
+
+                <TouchableOpacity style={styles.saveBtn}>
+                  <Text style={styles.saveBtnText}>Save</Text>
+                </TouchableOpacity>
+              </>
+            )}
+
+            {/* ===== MANAGE ADDRESS ===== */}
+            {activeMenu === 'Manage Address' && (
+              <>
+                <Text style={styles.pageTitle}>Manage Address</Text>
+                <View style={styles.divider} />
+
+                <TouchableOpacity style={styles.addBtn}>
+                  <Text style={styles.addBtnText}>+ Add New Address</Text>
+                </TouchableOpacity>
+
+                {addresses.length === 0 && (
+                  <View style={styles.emptyBox}>
+                    <Ionicons name="location-outline" size={60} color="#ddd" />
+                    <Text style={styles.emptyTitle}>No Address Found</Text>
+                  </View>
+                )}
+              </>
+            )}
+
+            {/* ===== TRANSACTION HISTORY ===== */}
+            {activeMenu === 'Transaction History' && (
+              <>
+                <Text style={styles.pageTitle}>Transaction History</Text>
+                <View style={styles.divider} />
+
+                {/* HEADER */}
+                <View style={styles.txnHeader}>
+                  <Text style={styles.txnHeaderText}>Transaction ID</Text>
+                  <Text style={styles.txnHeaderText}>Payment Method</Text>
+                  <Text style={styles.txnHeaderText}>Transaction Date</Text>
+                  <Text style={styles.txnHeaderText}>Amount</Text>
+                  <Text style={styles.txnHeaderText}>Status</Text>
+                </View>
+
+                {/* EMPTY */}
+                {transactions.length === 0 && (
+                  <View style={styles.emptyBox}>
+                    <Ionicons name="receipt-outline" size={60} color="#ddd" />
+                    <Text style={styles.emptyTitle}>No Transactions Yet</Text>
+                    <Text style={styles.emptySub}>
+                      Your transaction details will appear here
+                    </Text>
+                  </View>
+                )}
+              </>
+            )}
+
           </View>
         </View>
 
       </View>
+
+      {/* LOGOUT MODAL */}
+      <Modal transparent visible={modalVisible} animationType="fade">
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalBox}>
+
+            <Text style={styles.modalTitle}>Logout</Text>
+            <Text>Are you sure you want to logout?</Text>
+
+            <TouchableOpacity
+              style={styles.logoutBtn}
+              onPress={async () => {
+                await AsyncStorage.removeItem('isLoggedIn');
+                router.replace('/');
+              }}
+            >
+              <Text style={{ color: 'white' }}>Yes</Text>
+            </TouchableOpacity>
+
+          </View>
+        </View>
+      </Modal>
+
     </SafeAreaView>
   );
 }
 
 const ORANGE = '#F36D00';
-const GREEN = '#2ecc71';
 
 const styles = StyleSheet.create({
+
   container: { flex: 1, backgroundColor: '#f5f5f5' },
 
   loadingBox: { flex: 1, justifyContent: 'center', alignItems: 'center' },
 
-  // Not logged in
-  notLoggedBox: {
-    flex: 1, justifyContent: 'center', alignItems: 'center', padding: 30,
-  },
-  notLoggedText: { fontSize: 20, fontWeight: 'bold', color: '#222', marginTop: 16 },
-  notLoggedSub: { fontSize: 14, color: '#888', textAlign: 'center', marginTop: 8, marginBottom: 24 },
-  signInBtn: {
-    backgroundColor: ORANGE, borderRadius: 8,
-    paddingVertical: 14, paddingHorizontal: 40,
-  },
-  signInBtnText: { color: 'white', fontSize: 15, fontWeight: 'bold' },
-
-  // Header
   header: {
-    backgroundColor: ORANGE, flexDirection: 'row',
-    alignItems: 'center', padding: 16, paddingTop: 20,
+    backgroundColor: ORANGE,
+    flexDirection: 'row',
+    padding: 16,
+    alignItems: 'center',
   },
-  backBtn: { marginRight: 12 },
-  headerTitle: { color: 'white', fontSize: 18, fontWeight: 'bold' },
 
-  // Body layout
-  body: { flex: 1, flexDirection: 'row' },
+  headerTitle: { color: 'white', fontSize: 18, marginLeft: 10 },
 
-  // Sidebar
+  body: { flex: 1, flexDirection: 'row', padding: 12 },
+
   sidebar: {
-    width: 180, backgroundColor: 'white',
-    padding: 16, borderRightWidth: 1, borderRightColor: '#eee',
+    width: 200,
+    backgroundColor: 'white',
+    padding: 16,
+    borderRadius: 10,
+    marginRight: 10,
   },
-  profileIcon: { alignItems: 'center', marginBottom: 20, position: 'relative' },
-  editIcon: {
-    position: 'absolute', bottom: 2, right: 50,
-    backgroundColor: '#555', borderRadius: 10,
-    width: 20, height: 20, alignItems: 'center', justifyContent: 'center',
-  },
+
+  sidebarTitle: { fontWeight: 'bold', marginBottom: 10 },
+
   menuItem: {
-    flexDirection: 'row', alignItems: 'center',
-    paddingVertical: 14, borderBottomWidth: 1, borderBottomColor: '#f0f0f0',
+    flexDirection: 'row',
+    padding: 10,
+    borderRadius: 6,
+    marginBottom: 4,
   },
-  menuLabel: { flex: 1, fontSize: 13, color: '#555', marginLeft: 8 },
-  menuLabelActive: { color: GREEN, fontWeight: '600' },
-  menuArrow: { marginLeft: 4 },
 
-  // Main content
-  mainContent: { flex: 1, padding: 16 },
-  contentTitle: { fontSize: 15, fontWeight: 'bold', color: '#333', letterSpacing: 1 },
-  divider: { height: 1, backgroundColor: '#eee', marginTop: 8, marginBottom: 20 },
+  activeMenuItem: { backgroundColor: '#fff3eb' },
 
-  emptyBox: { flex: 1, justifyContent: 'center', alignItems: 'center' },
-  emptyText: { color: '#bbb', fontSize: 14, marginTop: 12 },
+  menuLabel: { marginLeft: 10 },
+
+  activeMenuLabel: { color: ORANGE, fontWeight: '600' },
+
+  mainContent: { flex: 1 },
+
+  card: { backgroundColor: 'white', padding: 20, borderRadius: 10 },
+
+  pageTitle: { fontSize: 18, fontWeight: 'bold' },
+
+  divider: { height: 1, backgroundColor: '#eee', marginVertical: 10 },
+
+  emptyBox: { alignItems: 'center', marginTop: 30 },
+
+  emptyTitle: { marginTop: 10, fontWeight: '600' },
+
+  emptySub: { fontSize: 13, color: '#888', marginTop: 5 },
+
+  inputLabel: { marginTop: 10, fontSize: 13 },
+
+  input: {
+    borderWidth: 1,
+    borderColor: '#ddd',
+    padding: 10,
+    marginBottom: 10,
+    borderRadius: 6,
+    backgroundColor: '#fafafa',
+  },
+
+  saveBtn: {
+    backgroundColor: ORANGE,
+    padding: 12,
+    alignItems: 'center',
+    borderRadius: 6,
+  },
+
+  saveBtnText: { color: 'white', fontWeight: 'bold' },
+
+  addBtn: {
+    borderWidth: 1,
+    borderColor: ORANGE,
+    padding: 12,
+    alignItems: 'center',
+    marginBottom: 10,
+    borderRadius: 6,
+  },
+
+  addBtnText: { color: ORANGE, fontWeight: '600' },
+
+  txnHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor: '#fafafa',
+    paddingVertical: 10,
+    paddingHorizontal: 8,
+    borderRadius: 6,
+    borderWidth: 1,
+    borderColor: '#eee',
+  },
+
+  txnHeaderText: {
+    flex: 1,
+    fontSize: 11,
+    fontWeight: '600',
+    color: '#555',
+    textAlign: 'center',
+  },
+
+  modalOverlay: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: '#00000088',
+  },
+
+  modalBox: {
+    backgroundColor: 'white',
+    margin: 20,
+    padding: 20,
+    borderRadius: 10,
+  },
+
+  modalTitle: { fontWeight: 'bold', marginBottom: 10 },
+
+  logoutBtn: {
+    backgroundColor: ORANGE,
+    padding: 10,
+    marginTop: 10,
+    alignItems: 'center',
+    borderRadius: 6,
+  },
+
+  notLoggedBox: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+
+  notLoggedText: { marginTop: 10 },
+
+  signInBtn: {
+    backgroundColor: ORANGE,
+    padding: 10,
+    marginTop: 10,
+    borderRadius: 6,
+  },
+
+  signInBtnText: { color: 'white' },
+
 });
