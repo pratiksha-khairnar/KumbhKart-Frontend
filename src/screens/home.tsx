@@ -2,6 +2,9 @@ import { FontAwesome, Ionicons } from '@expo/vector-icons';
 import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
 import React from 'react';
+import SignIn from "./signIn";
+
+
 import {
   Dimensions,
   ImageBackground,
@@ -197,38 +200,129 @@ const Home = () => {
 export default Home;
 
 const styles = StyleSheet.create({
-  container:   { flex: 1, backgroundColor: '#fff' },
-  header:   { backgroundColor: '#f36d00', flexDirection: 'row', alignItems: 'center', paddingHorizontal: 15, paddingTop: 20, paddingBottom: 6, justifyContent: 'space-between' },
-  logo:     { width: 40, height: 40 },
-  navLinks: { flexDirection: 'row', alignItems: 'center', gap: 20 },
-  navItem:  { color: 'white', fontSize: 14, fontWeight: '500' },
-  heroWrapper: { width: '100%', height: 180 },
-  heroBg:      { width: '100%', height: '100%' },
-  heroOverlay: { flex: 1, backgroundColor: 'rgba(0,0,0,0.4)', justifyContent: 'center', alignItems: 'center', paddingHorizontal: 20 },
-  heroSubText: { color: 'white', fontSize: 14, textAlign: 'center', marginBottom: 12, fontWeight: '700' },
-  searchBar:        { flexDirection: 'row', backgroundColor: 'white', width: '95%', height: 40, borderRadius: 5, overflow: 'hidden' },
-  searchInput:      { flex: 1, paddingHorizontal: 12, fontSize: 12 },
-  searchButton:     { backgroundColor: '#f36d00', paddingHorizontal: 15, justifyContent: 'center' },
-  searchButtonText: { color: 'white', fontWeight: 'bold', fontSize: 12 },
-  deliveryBar:  { backgroundColor: '#f36d00', padding: 8, alignItems: 'center' },
-  deliveryText: { color: 'white', fontWeight: 'bold', fontSize: 14 },
-  section:           { marginTop: 15 },
-  sectionTitle:      { fontSize: 18, color: '#333', fontWeight: '700', marginLeft: CONTAINER_PADDING, marginBottom: 5 },
-  divider:           { height: 1, backgroundColor: '#eee', marginBottom: 10, marginHorizontal: 20 },
-  centeredContainer: { paddingHorizontal: CONTAINER_PADDING, width: '100%' },
-  grid:     { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start', gap: ITEM_GAP },
-  card:     { alignItems: 'center', marginBottom: 15 },
-  catBox:   { borderWidth: 1, borderColor: '#e0e0e0', backgroundColor: '#fff', alignItems: 'center', justifyContent: 'center', padding: 5 },
-  catImage: { width: '90%', height: '90%' },
-  catLabel: { fontSize: 14, fontWeight: 'bold', marginTop: 5, textAlign: 'center', color: '#000', width: CAT_W },
-  footer:          { backgroundColor: '#666', marginTop: 30 },
-  footerTaglineBox:{ padding: 15, borderBottomWidth: 0.5, borderBottomColor: '#888', alignItems: 'center' },
-  footerTagline:   { color: 'white', fontSize: 12, textAlign: 'center' },
-  footerMainRow:   { padding: 30, flexDirection: 'row', justifyContent: 'space-between', flexWrap: 'wrap' },
-  footerCol:       { minWidth: 150, marginBottom: 20 },
-  footerHead:      { color: 'white', fontSize: 24, fontWeight: '400', marginBottom: 15, fontFamily: 'serif' },
-  footerText:      { color: 'white', fontSize: 12, lineHeight: 18 },
-  footerLink:      { color: 'white', fontSize: 12, marginBottom: 8 },
-  socialRow:       { flexDirection: 'row', marginTop: 20 },
-  socialIcon:      { marginRight: 15 },
+  container: { flex: 1, backgroundColor: '#fff' },
+
+  // Header Styles
+  header: {
+  backgroundColor: '#F36D00',
+  flexDirection: 'row',
+  alignItems: 'center',
+  paddingHorizontal: 20,
+  paddingTop: 45,
+  paddingBottom: 15,
+  justifyContent: 'space-between',
+
+  zIndex: 1000,      // 👈 add karo
+  elevation: 10,     // 👈 Android ke liye
+},
+  logo: {
+    width: 45,
+    height: 45,
+    resizeMode: 'contain',
+  },
+  navLinksContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flex: 1,
+    justifyContent: 'flex-end', // Ye links ko RIGHT side mein shift karega
+  },
+  navLink: {
+    color: 'white',
+    fontSize: 13,
+    fontWeight: '500',
+    marginLeft: 20, // Links ke beech ka gap
+  },
+
+  // Hero Section
+  heroSection: {
+    width: '100%',
+    height: 260,
+  },
+  heroOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.3)', // Dark overlay taaki text dikhe
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 15,
+  },
+  heroText: {
+    color: 'white',
+    fontSize: 15,
+    textAlign: 'center',
+    marginBottom: 20,
+    fontWeight: '400',
+  },
+  searchBarContainer: {
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    width: '100%',
+    height: 45,
+    borderRadius: 4,
+    overflow: 'hidden',
+  },
+  dropdownBox: {
+    width: 80,
+    backgroundColor: '#F5F5F5',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRightWidth: 1,
+    borderRightColor: '#ddd',
+  },
+  dropdownText: { fontSize: 12, color: '#333' },
+  searchInput: {
+    flex: 1,
+    paddingHorizontal: 15,
+    fontSize: 13,
+  },
+  searchButton: {
+    backgroundColor: '#F36D00',
+    width: 80,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  searchButtonText: { color: 'white', fontWeight: 'bold', fontSize: 14 },
+
+  // Delivery Bar
+  deliveryBar: {
+    backgroundColor: '#F36D00',
+    paddingVertical: 12,
+    alignItems: 'center',
+  },
+  deliveryText: { color: 'white', fontWeight: '700', fontSize: 14 },
+
+  // Category Grid
+  categorySection: { padding: 20 },
+  categoryHeading: { fontSize: 18, fontWeight: '500', color: '#333' },
+  headingUnderline: { height: 1, backgroundColor: '#ddd', marginTop: 8, marginBottom: 20 },
+  categoryGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  },
+  categoryCard: {
+    width: '31%', // Ek row mein 3 cards
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  imageBox: {
+    width: '100%',
+    aspectRatio: 1, // Square box
+    borderWidth: 1,
+    borderColor: '#eee',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 10,
+    borderRadius: 4,
+  },
+  categoryImage: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'contain',
+  },
+  categoryTitle: {
+    marginTop: 10,
+    fontWeight: 'bold',
+    fontSize: 12,
+    color: '#000',
+  },
 });
