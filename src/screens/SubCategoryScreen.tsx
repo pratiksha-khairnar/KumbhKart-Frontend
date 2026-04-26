@@ -206,7 +206,7 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#EFEFEF' },
   sectionGap: { height: 10, backgroundColor: '#EFEFEF' },
   header: {
-    backgroundColor: '#F36D00',
+    backgroundColor: '#db1c07',
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 32,
@@ -225,9 +225,9 @@ const styles = StyleSheet.create({
   cartBtn: { marginLeft: 24, backgroundColor: 'rgba(255,255,255,0.25)', borderRadius: 50, padding: 8 },
   tabsSection: { backgroundColor: '#ffffff', paddingVertical: 14, paddingHorizontal: 15, shadowColor: '#000', shadowOpacity: 0.06, shadowRadius: 4, elevation: 3 },
   tabsContent: { flexDirection: 'row', alignItems: 'center', gap: 12, paddingHorizontal: 4 },
-  tabBtn: { width: 180, height: 44, justifyContent: 'center', alignItems: 'center', borderWidth: 1.5, borderColor: '#F36D00', borderRadius: 6, backgroundColor: '#fff' },
-  tabBtnActive: { backgroundColor: '#F36D00', borderColor: '#F36D00' },
-  tabBtnText: { fontSize: 13, fontWeight: '700', color: '#F36D00', letterSpacing: 0.8, textTransform: 'uppercase' },
+  tabBtn: { width: 180, height: 44, justifyContent: 'center', alignItems: 'center', borderWidth: 1.5, borderColor: '#db1c07', borderRadius: 6, backgroundColor: '#fff' },
+  tabBtnActive: { backgroundColor: '#db1c07', borderColor: '#db1c07' },
+  tabBtnText: { fontSize: 13, fontWeight: '700', color: '#db1c07', letterSpacing: 0.8, textTransform: 'uppercase' },
   tabBtnTextActive: { color: '#ffffff' },
   grid: { padding: 10 },
 
@@ -243,6 +243,6 @@ const styles = StyleSheet.create({
   discount: { fontSize: 10, color: '#777' },
   weight: { fontSize: 11, color: '#888', marginBottom: 8 },
   btnRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
-  addBtn: { backgroundColor: '#F9C49E', paddingVertical: 6, paddingHorizontal: 20, borderRadius: 4 },
-  addText: { color: '#333', fontWeight: '700', fontSize: 13 },
+  addBtn: { backgroundColor: '#fe8d6e', paddingVertical: 6, paddingHorizontal: 20, borderRadius: 4 },
+  addText: { color: '#151515', fontWeight: '700', fontSize: 13 },
 });

@@ -156,7 +156,7 @@ export default function StoreRegister() {
               ]}
               onPress={() => toggleProduct(item)}
             >
-              <Text style={{ color: form.products.includes(item) ? "#F36D00" : "#333" }}>
+              <Text style={{ color: form.products.includes(item) ? "#db1c07" : "#333" }}>
                 {item}
               </Text>
             </TouchableOpacity>
@@ -175,7 +175,7 @@ export default function StoreRegister() {
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: "#F36D00",
+    backgroundColor: "#db1c07",
     paddingVertical: 16,
     paddingHorizontal: 16,
     alignItems: "flex-start",
@@ -220,10 +220,10 @@ const styles = StyleSheet.create({
   },
   checked: {
     backgroundColor: "#ffe0cc",
-    borderColor: "#F36D00",
+    borderColor: "#db1c07",
   },
   button: {
-    backgroundColor: "#F36D00",
+    backgroundColor: "#db1c07",
     paddingVertical: 14,
     marginTop: 25,
     borderRadius: 10,

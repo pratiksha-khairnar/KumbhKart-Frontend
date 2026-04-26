@@ -1,15 +1,19 @@
-import React, { useState, useEffect } from "react";
-import {
-  View, Text, TextInput, TouchableOpacity,
-  StyleSheet, Modal, Pressable, Image,
-  ActivityIndicator,
-} from "react-native";
-import { usePathname, useRouter } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { usePathname, useRouter } from "expo-router";
+import React, { useEffect, useState } from "react";
+import {
+  Image,
+  Modal, Pressable,
+  StyleSheet,
+  Text, TextInput, TouchableOpacity,
+  View
+} from "react-native";
 
 type Step = 'phone' | 'otp' | 'success';
 
 const SignIn = () => {
+    const [redirectPath, setRedirectPath] = useState('');
+  
   const [modalVisible, setModalVisible] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -122,13 +126,19 @@ const SignIn = () => {
             <Text style={styles.item}>Home</Text>
           </TouchableOpacity>
 
-          {/* My Orders */}
           <TouchableOpacity onPress={() => {
-            setDropdownOpen(false);
-            router.push('/myOrders');
-          }}>
-            <Text style={styles.item}>My Orders</Text>
-          </TouchableOpacity>
+  setDropdownOpen(false);
+
+  if (!isLoggedIn) {
+    setRedirectPath('/myOrders'); // 👈 save karo kaha jana hai
+    setModalVisible(true);
+    return;
+  }
+
+  router.push('/myOrders');
+}}>
+  <Text style={styles.item}>My Orders</Text>
+</TouchableOpacity>
 
           {/* My Wishlist */}
           <TouchableOpacity onPress={() => {

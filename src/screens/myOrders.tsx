@@ -1,11 +1,16 @@
+import { Ionicons } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import {
-  View, Text, TouchableOpacity, StyleSheet,
-  SafeAreaView, ActivityIndicator, Modal, TextInput
+  ActivityIndicator, Modal,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View
 } from 'react-native';
-import { useRouter } from 'expo-router';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Ionicons } from '@expo/vector-icons';
 
 export default function MyOrders() {
 
@@ -44,7 +49,7 @@ export default function MyOrders() {
   if (isLoggedIn === null) {
     return (
       <View style={styles.loadingBox}>
-        <ActivityIndicator size="large" color="#F36D00" />
+        <ActivityIndicator size="large" color="#db1c07" />
       </View>
     );
   }
@@ -54,7 +59,7 @@ export default function MyOrders() {
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.notLoggedBox}>
-          <Ionicons name="lock-closed-outline" size={60} color="#F36D00" />
+          <Ionicons name="lock-closed-outline" size={60} color="#db1c07" />
           <Text style={styles.notLoggedText}>Sign In Required</Text>
 
           <TouchableOpacity
@@ -102,7 +107,7 @@ export default function MyOrders() {
               <Ionicons
                 name={item.icon as any}
                 size={18}
-                color={activeMenu === item.label ? '#F36D00' : '#555'}
+                color={activeMenu === item.label ? '#db1c07' : '#555'}
               />
               <Text
                 style={[
@@ -235,7 +240,7 @@ export default function MyOrders() {
   );
 }
 
-const ORANGE = '#F36D00';
+const ORANGE = '#db1c07';
 
 const styles = StyleSheet.create({
 
