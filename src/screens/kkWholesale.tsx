@@ -1,11 +1,30 @@
 import React, { useState } from "react";
 import {
-  View, Text, TextInput, StyleSheet,
-  ScrollView, TouchableOpacity
+  Alert, Platform,
+  ScrollView,
+  StyleSheet,
+  Text, TextInput,
+  TouchableOpacity,
+  View
 } from "react-native";
 
+// Form ka type define kiya taaki TS error na de
+interface StoreForm {
+  storeName: string;
+  ownerName: string;
+  address1: string;
+  address2: string;
+  city: string;
+  state: string;
+  pinCode: string;
+  mobile: string;
+  gstPan: string;
+  registerAs: string;
+  products: string[];
+}
+
 export default function StoreRegister() {
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<StoreForm>({
     storeName: "",
     ownerName: "",
     address1: "",
@@ -19,7 +38,7 @@ export default function StoreRegister() {
     products: [],
   });
 
-  const toggleProduct = (item) => {
+  const toggleProduct = (item: string) => {
     setForm((prev) => {
       const exists = prev.products.includes(item);
       return {
@@ -33,7 +52,17 @@ export default function StoreRegister() {
 
   const handleSubmit = () => {
     console.log(form);
-    alert("Store Registered Successfully!");
+    // Platform specific alert fix
+    if (Platform.OS === 'web') {
+      window.alert("Store Registered Successfully!");
+    } else {
+      Alert.alert("Success", "Store Registered Successfully!");
+    }
+  };
+
+  // State update karne ka sabse sahi tarika
+  const updateField = (field: keyof StoreForm, value: string) => {
+    setForm(prev => ({ ...prev, [field]: value }));
   };
 
   return (
@@ -52,57 +81,66 @@ export default function StoreRegister() {
         <TextInput
           placeholder="Store Name *"
           style={styles.input}
-          onChangeText={(t) => setForm({ ...form, storeName: t })}
+          value={form.storeName}
+          onChangeText={(t) => updateField("storeName", t)}
         />
 
         <TextInput
           placeholder="Owner Name *"
           style={styles.input}
-          onChangeText={(t) => setForm({ ...form, ownerName: t })}
+          value={form.ownerName}
+          onChangeText={(t) => updateField("ownerName", t)}
         />
 
         <TextInput
           placeholder="Address Line 1 *"
           style={styles.input}
-          onChangeText={(t) => setForm({ ...form, address1: t })}
+          value={form.address1}
+          onChangeText={(t) => updateField("address1", t)}
         />
 
         <TextInput
           placeholder="Address Line 2"
           style={styles.input}
-          onChangeText={(t) => setForm({ ...form, address2: t })}
+          value={form.address2}
+          onChangeText={(t) => updateField("address2", t)}
         />
 
         <TextInput
           placeholder="City *"
           style={styles.input}
-          onChangeText={(t) => setForm({ ...form, city: t })}
+          value={form.city}
+          onChangeText={(t) => updateField("city", t)}
         />
 
         <TextInput
           placeholder="State *"
           style={styles.input}
-          onChangeText={(t) => setForm({ ...form, state: t })}
+          value={form.state}
+          onChangeText={(t) => updateField("state", t)}
         />
 
         <TextInput
           placeholder="Pin Code *"
           keyboardType="numeric"
           style={styles.input}
-          onChangeText={(t) => setForm({ ...form, pinCode: t })}
+          value={form.pinCode}
+          onChangeText={(t) => updateField("pinCode", t)}
         />
 
         <TextInput
           placeholder="Mobile *"
           keyboardType="phone-pad"
           style={styles.input}
-          onChangeText={(t) => setForm({ ...form, mobile: t })}
+          value={form.mobile}
+          onChangeText={(t) => updateField("mobile", t)}
         />
 
         <TextInput
           placeholder="GST / PAN *"
           style={styles.input}
-          onChangeText={(t) => setForm({ ...form, gstPan: t })}
+          value={form.gstPan}
+          onChangeText={(t) => updateField("gstPan", t)}
         />
 
         {/* PRODUCTS */}
@@ -118,7 +156,9 @@ export default function StoreRegister() {
               ]}
               onPress={() => toggleProduct(item)}
             >
-              <Text>{item}</Text>
+              <Text style={{ color: form.products.includes(item) ? "#F36D00" : "#333" }}>
+                {item}
+              </Text>
             </TouchableOpacity>
           )
         )}
@@ -134,78 +174,65 @@ export default function StoreRegister() {
 }
 
 const styles = StyleSheet.create({
-
   header: {
-  backgroundColor: "#F36D00",
-  paddingVertical: 16,
-  paddingHorizontal: 16,
-  alignItems: "flex-start",
-  justifyContent: "center",
-},
-
- headerTitle: {
-  color: "white",
-  fontSize: 18,
-  fontWeight: "bold",
-  textAlign: "left",
-  width: "100%",
-},
-
+    backgroundColor: "#F36D00",
+    paddingVertical: 16,
+    paddingHorizontal: 16,
+    alignItems: "flex-start",
+    justifyContent: "center",
+  },
+  headerTitle: {
+    color: "white",
+    fontSize: 18,
+    fontWeight: "bold",
+    textAlign: "left",
+    width: "100%",
+  },
   container: {
     padding: 20,
   },
-
- input: {
-  backgroundColor: "white",
-  padding: 12,
-  marginBottom: 10,
-  borderRadius: 8,
-  borderWidth: 1,
-  borderColor: "#ddd",
-
-  // 👉 NEW FIX (left-right space kam)
-  width: "92%",
-  alignSelf: "center",
-},
-
+  input: {
+    backgroundColor: "white",
+    padding: 12,
+    marginBottom: 10,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "#ddd",
+    width: "92%",
+    alignSelf: "center",
+  },
   label: {
-  marginTop: 10,
-  marginBottom: 10,
-  fontWeight: "bold",
-  alignSelf: "flex-start", // 👉 left align text
-  marginLeft: "4%",
-},
+    marginTop: 10,
+    marginBottom: 10,
+    fontWeight: "bold",
+    alignSelf: "flex-start",
+    marginLeft: "4%",
+  },
   checkbox: {
-  backgroundColor: "white",
-  padding: 10,
-  marginBottom: 8,
-  borderRadius: 6,
-  borderWidth: 1,
-  borderColor: "#ddd",
-
-  // 👉 same width control as inputs
-  width: "92%",
-  alignSelf: "center",
-},
-
+    backgroundColor: "white",
+    padding: 10,
+    marginBottom: 8,
+    borderRadius: 6,
+    borderWidth: 1,
+    borderColor: "#ddd",
+    width: "92%",
+    alignSelf: "center",
+  },
   checked: {
-  backgroundColor: "#ffe0cc",
-  borderColor: "#F36D00",
-},
-
+    backgroundColor: "#ffe0cc",
+    borderColor: "#F36D00",
+  },
   button: {
-  backgroundColor: "#F36D00",
-  paddingVertical: 14,
-  marginTop: 25,
-  borderRadius: 10,
-
-  width: "45%",
-  alignSelf: "center",
-  alignItems: "center",
-},
-
+    backgroundColor: "#F36D00",
+    paddingVertical: 14,
+    marginTop: 25,
+    borderRadius: 10,
+    width: "45%",
+    alignSelf: "center",
+    alignItems: "center",
+  },
   buttonText: {
-  color: "white",
-  fontWeight: "bold",
-},
+    color: "white",
+    fontWeight: "bold",
+  },
 });

@@ -3,7 +3,6 @@ import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
 import React from 'react';
 
-
 import {
   Dimensions,
   ImageBackground,
@@ -73,25 +72,29 @@ const Home = () => {
 
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      {/* HEADER SECTION - NO CHANGES */}
+      {/* HEADER SECTION */}
       <View style={styles.header}>
         <Image source={{ uri: 'https://www.chhayakart.com/cdn/shop/files/ck_logo_white_1.png' }} style={styles.logo} contentFit="contain" />
         <View style={styles.navLinksContainer}>
           <TouchableOpacity style={styles.navItem} onPress={() => router.push('/')}><Text style={styles.navLink}>Home</Text></TouchableOpacity>
           <TouchableOpacity style={styles.navItem} onPress={() => router.push({ pathname: '/sub-category/[id]', params: { id: 'PAPAD' } })}><Text style={styles.navLink}>Categories</Text></TouchableOpacity>
           <TouchableOpacity style={styles.navItem}><Text style={styles.navLink}>About Us</Text></TouchableOpacity>
-          <TouchableOpacity style={styles.navItem}><Text style={styles.navLink}>Sign In</Text></TouchableOpacity>
+          
+          {/* Sign In redirection logic added here */}
+          <TouchableOpacity style={styles.navItem} onPress={() => router.push('/signIn')}>
+            <Text style={styles.navLink}>Sign In</Text>
+          </TouchableOpacity>
+
           <TouchableOpacity style={styles.cartBtn}><Ionicons name="cart" size={26} color="#000" /></TouchableOpacity>
         </View>
       </View>
 
-      {/* HERO SECTION - SEARCH BAR UPDATED */}
+      {/* HERO SECTION */}
       <View style={styles.heroWrapper}>
         <ImageBackground source={{ uri: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=1200&q=80' }} style={styles.heroBg}>
           <View style={styles.heroOverlay}>
             <Text style={styles.heroSubText}>Empowering Rural India Through Authentic Flavors</Text>
             
-            {/* Updated Search Bar Layout */}
             <View style={styles.searchBar}>
               <View style={styles.allIndiaBox}>
                 <Text style={styles.allIndiaText}>All India</Text>
@@ -105,7 +108,6 @@ const Home = () => {
                 <Text style={styles.searchButtonText}>Search</Text>
               </TouchableOpacity>
             </View>
-            
           </View>
         </ImageBackground>
       </View>
@@ -134,7 +136,7 @@ const Home = () => {
         <View style={styles.footerTaglineBox}>
           <Text style={styles.footerTagline}>Chhayakart: Empowered Minds, Flourishing Enterprises</Text>
         </View>
-        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', padding: '30px', flexWrap: 'wrap' }}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 30, flexWrap: 'wrap' }}>
             <View style={styles.footerCol}>
               <Text style={styles.footerHead}>Get In Touch</Text>
               <Text style={styles.footerText}>Plot No. 21, ZP Colony, Deopur, Dhule 424005</Text>
@@ -144,7 +146,6 @@ const Home = () => {
                 <FontAwesome name="linkedin-square" size={20} color="white" style={styles.socialIcon} />
               </View>
             </View>
-            {/* ... other columns stay the same ... */}
             <View style={styles.footerCol}>
                 <Text style={styles.footerHead}>Categories</Text>
                 <Text style={styles.footerLink}>Season Special</Text>
@@ -169,7 +170,7 @@ const Home = () => {
                 <Text style={styles.footerLink}>Blog</Text>
                 <Text style={styles.footerLink}>Return & Refund</Text>
             </View>
-        </div>
+        </View>
       </View>
     </ScrollView>
   );
@@ -189,8 +190,6 @@ const styles = StyleSheet.create({
   heroBg: { width: '100%', height: '100%' },
   heroOverlay: { flex: 1, backgroundColor: 'rgba(0,0,0,0.4)', justifyContent: 'center', alignItems: 'center', paddingHorizontal: 20 },
   heroSubText: { color: 'white', fontSize: 14, textAlign: 'center', marginBottom: 12, fontWeight: '700' },
-  
-  // UPDATED SEARCH BAR STYLES
   searchBar: { 
     flexDirection: 'row', 
     backgroundColor: 'white', 
@@ -227,7 +226,6 @@ const styles = StyleSheet.create({
     height: '100%'
   },
   searchButtonText: { color: 'white', fontWeight: 'bold', fontSize: 13 },
-
   deliveryBar: { backgroundColor: '#f36d00', padding: 8, alignItems: 'center' },
   deliveryText: { color: 'white', fontWeight: 'bold', fontSize: 14 },
   section: { marginTop: 30 },
@@ -239,7 +237,6 @@ const styles = StyleSheet.create({
   catBox: { borderWidth: 1, borderColor: '#eee', backgroundColor: '#fff', alignItems: 'center', justifyContent: 'center', padding: 10, shadowColor: '#000', shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.05, shadowRadius: 2, elevation: 2 },
   catImage: { width: '85%', height: '85%' },
   catLabel: { fontSize: 14, fontWeight: 'bold', marginTop: 10, textAlign: 'center', color: '#000', textTransform: 'uppercase' },
-
   footer: { backgroundColor: '#666', marginTop: 30 },
   footerTaglineBox: { padding: 15, borderBottomWidth: 0.5, borderBottomColor: '#888', alignItems: 'center' },
   footerTagline: { color: 'white', fontSize: 12, textAlign: 'center' },
