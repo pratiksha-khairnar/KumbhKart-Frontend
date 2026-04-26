@@ -40,9 +40,9 @@
         }
       ]
     ],
-    "experiments": {
-      "typedRoutes": true,
-      "reactCompiler": true
-    }
+   "experiments": {
+  "typedRoutes": false,
+  "reactCompiler": true
+}
   }
 }

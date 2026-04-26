@@ -1,17 +1,19 @@
-import { Ionicons } from '@expo/vector-icons';
-import React, { useState } from 'react'; // 1. useState import kiya
+import { FontAwesome, Ionicons } from '@expo/vector-icons';
+import { Image } from 'expo-image';
+import { useRouter } from 'expo-router';
+import React from 'react';
+
 import {
   Dimensions,
-  Image,
   ImageBackground,
-  SafeAreaView,
+  Platform,
   ScrollView,
   StatusBar,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
-  View
+  View,
 } from 'react-native';
 import CartDrawer from './components/Add_to_Cart'; // 2. CartDrawer ka path (ensure karein file wahan ho)
 
@@ -43,6 +45,8 @@ const HomeScreen = () => {
           >
             <Ionicons name="cart-outline" size={26} color="white" />
           </TouchableOpacity>
+
+          <TouchableOpacity style={styles.cartBtn}><Ionicons name="cart" size={26} color="#000" /></TouchableOpacity>
         </View>
       </View>
 
@@ -114,7 +118,7 @@ const HomeScreen = () => {
   );
 };
 
-export default HomeScreen;
+export default Home;
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#fff' },

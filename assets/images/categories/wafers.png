@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<!-- saved from url=(0023)https://chhayakart.com/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css">:root, :host {
+  --fa-font-solid: normal 900 1em/1 "Font Awesome 6 Solid";
+  --fa-font-regular: normal 400 1em/1 "Font Awesome 6 Regular";
+  --fa-font-light: normal 300 1em/1 "Font Awesome 6 Light";
+  --fa-font-thin: normal 100 1em/1 "Font Awesome 6 Thin";
+  --fa-font-duotone: normal 900 1em/1 "Font Awesome 6 Duotone";
+  --fa-font-sharp-solid: normal 900 1em/1 "Font Awesome 6 Sharp";
+  --fa-font-sharp-regular: normal 400 1em/1 "Font Awesome 6 Sharp";
+  --fa-font-sharp-light: normal 300 1em/1 "Font Awesome 6 Sharp";
+  --fa-font-brands: normal 400 1em/1 "Font Awesome 6 Brands";
+}
+
+svg:not(:root).svg-inline--fa, svg:not(:host).svg-inline--fa {
+  overflow: visible;
+  box-sizing: content-box;
+}
+
+.svg-inline--fa {
+  display: var(--fa-display, inline-block);
+  height: 1em;
+  overflow: visible;
+  vertical-align: -0.125em;
+}
+.svg-inline--fa.fa-2xs {
+  vertical-align: 0.1em;
+}
+.svg-inline--fa.fa-xs {
+  vertical-align: 0em;
+}
+.svg-inline--fa.fa-sm {
+  vertical-align: -0.0714285705em;
+}
+.svg-inline--fa.fa-lg {
+  vertical-align: -0.2em;
+}
+.svg-inline--fa.fa-xl {
+  vertical-align: -0.25em;
+}
+.svg-inline--fa.fa-2xl {
+  vertical-align: -0.3125em;
+}
+.svg-inline--fa.fa-pull-left {
+  margin-right: var(--fa-pull-margin, 0.3em);
+  width: auto;
+}
+.svg-inline--fa.fa-pull-right {
+  margin-left: var(--fa-pull-margin, 0.3em);
+  width: auto;
+}
+.svg-inline--fa.fa-li {
+  width: var(--fa-li-width, 2em);
+  top: 0.25em;
+}
+.svg-inline--fa.fa-fw {
+  width: var(--fa-fw-width, 1.25em);
+}
+
+.fa-layers svg.svg-inline--fa {
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.fa-layers-counter, .fa-layers-text {
+  display: inline-block;
+  position: absolute;
+  text-align: center;
+}
+
+.fa-layers {
+  display: inline-block;
+  height: 1em;
+  position: relative;
+  text-align: center;
+  vertical-align: -0.125em;
+  width: 1em;
+}
+.fa-layers svg.svg-inline--fa {
+  -webkit-transform-origin: center center;
+          transform-origin: center center;
+}
+
+.fa-layers-text {
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  -webkit-transform-origin: center center;
+          transform-origin: center center;
+}
+
+.fa-layers-counter {
+  background-color: var(--fa-counter-background-color, #ff253a);
+  border-radius: var(--fa-counter-border-radius, 1em);
+  box-sizing: border-box;
+  color: var(--fa-inverse, #fff);
+  line-height: var(--fa-counter-line-height, 1);
+  max-width: var(--fa-counter-max-width, 5em);
+  min-width: var(--fa-counter-min-width, 1.5em);
+  overflow: hidden;
+  padding: var(--fa-counter-padding, 0.25em 0.5em);
+  right: var(--fa-right, 0);
+  text-overflow: ellipsis;
+  top: var(--fa-top, 0);
+  -webkit-transform: scale(var(--fa-counter-scale, 0.25));
+          transform: scale(var(--fa-counter-scale, 0.25));
+  -webkit-transform-origin: top right;
+          transform-origin: top right;
+}
+
+.fa-layers-bottom-right {
+  bottom: var(--fa-bottom, 0);
+  right: var(--fa-right, 0);
+  top: auto;
+  -webkit-transform: scale(var(--fa-layers-scale, 0.25));
+          transform: scale(var(--fa-layers-scale, 0.25));
+  -webkit-transform-origin: bottom right;
+          transform-origin: bottom right;
+}
+
+.fa-layers-bottom-left {
+  bottom: var(--fa-bottom, 0);
+  left: var(--fa-left, 0);
+  right: auto;
+  top: auto;
+  -webkit-transform: scale(var(--fa-layers-scale, 0.25));
+          transform: scale(var(--fa-layers-scale, 0.25));
+  -webkit-transform-origin: bottom left;
+          transform-origin: bottom left;
+}
+
+.fa-layers-top-right {
+  top: var(--fa-top, 0);
+  right: var(--fa-right, 0);
+  -webkit-transform: scale(var(--fa-layers-scale, 0.25));
+          transform: scale(var(--fa-layers-scale, 0.25));
+  -webkit-transform-origin: top right;
+          transform-origin: top right;
+}
+
+.fa-layers-top-left {
+  left: var(--fa-left, 0);
+  right: auto;
+  top: var(--fa-top, 0);
+  -webkit-transform: scale(var(--fa-layers-scale, 0.25));
+          transform: scale(var(--fa-layers-scale, 0.25));
+  -webkit-transform-origin: top left;
+          transform-origin: top left;
+}
+
+.fa-1x {
+  font-size: 1em;
+}
+
+.fa-2x {
+  font-size: 2em;
+}
+
+.fa-3x {
+  font-size: 3em;
+}
+
+.fa-4x {
+  font-size: 4em;
+}
+
+.fa-5x {
+  font-size: 5em;
+}
+
+.fa-6x {
+  font-size: 6em;
+}
+
+.fa-7x {
+  font-size: 7em;
+}
+
+.fa-8x {
+  font-size: 8em;
+}
+
+.fa-9x {
+  font-size: 9em;
+}
+
+.fa-10x {
+  font-size: 10em;
+}
+
+.fa-2xs {
+  font-size: 0.625em;
+  line-height: 0.1em;
+  vertical-align: 0.225em;
+}
+
+.fa-xs {
+  font-size: 0.75em;
+  line-height: 0.0833333337em;
+  vertical-align: 0.125em;
+}
+
+.fa-sm {
+  font-size: 0.875em;
+  line-height: 0.0714285718em;
+  vertical-align: 0.0535714295em;
+}
+
+.fa-lg {
+  font-size: 1.25em;
+  line-height: 0.05em;
+  vertical-align: -0.075em;
+}
+
+.fa-xl {
+  font-size: 1.5em;
+  line-height: 0.0416666682em;
+  vertical-align: -0.125em;
+}
+
+.fa-2xl {
+  font-size: 2em;
+  line-height: 0.03125em;
+  vertical-align: -0.1875em;
+}
+
+.fa-fw {
+  text-align: center;
+  width: 1.25em;
+}
+
+.fa-ul {
+  list-style-type: none;
+  margin-left: var(--fa-li-margin, 2.5em);
+  padding-left: 0;
+}
+.fa-ul > li {
+  position: relative;
+}
+
+.fa-li {
+  left: calc(var(--fa-li-width, 2em) * -1);
+  position: absolute;
+  text-align: center;
+  width: var(--fa-li-width, 2em);
+  line-height: inherit;
+}
+
+.fa-border {
+  border-color: var(--fa-border-color, #eee);
+  border-radius: var(--fa-border-radius, 0.1em);
+  border-style: var(--fa-border-style, solid);
+  border-width: var(--fa-border-width, 0.08em);
+  padding: var(--fa-border-padding, 0.2em 0.25em 0.15em);
+}
+
+.fa-pull-left {
+  float: left;
+  margin-right: var(--fa-pull-margin, 0.3em);
+}
+
+.fa-pull-right {
+  float: right;
+  margin-left: var(--fa-pull-margin, 0.3em);
+}
+
+.fa-beat {
+  -webkit-animation-name: fa-beat;
+          animation-name: fa-beat;
+  -webkit-animation-delay: var(--fa-animation-delay, 0s);
+          animation-delay: var(--fa-animation-delay, 0s);
+  -webkit-animation-direction: var(--fa-animation-direction, normal);
+          animation-direction: var(--fa-animation-direction, normal);
+  -webkit-animation-duration: var(--fa-animation-duration, 1s);
+          animation-duration: var(--fa-animation-duration, 1s);
+  -webkit-animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+          animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+  -webkit-animation-timing-function: var(--fa-animation-timing, ease-in-out);
+          animation-timing-function: var(--fa-animation-timing, ease-in-out);
+}
+
+.fa-bounce {
+  -webkit-animation-name: fa-bounce;
+          animation-name: fa-bounce;
+  -webkit-animation-delay: var(--fa-animation-delay, 0s);
+          animation-delay: var(--fa-animation-delay, 0s);
+  -webkit-animation-direction: var(--fa-animation-direction, normal);
+          animation-direction: var(--fa-animation-direction, normal);
+  -webkit-animation-duration: var(--fa-animation-duration, 1s);
+          animation-duration: var(--fa-animation-duration, 1s);
+  -webkit-animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+          animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+  -webkit-animation-timing-function: var(--fa-animation-timing, cubic-bezier(0.28, 0.84, 0.42, 1));
+          animation-timing-function: var(--fa-animation-timing, cubic-bezier(0.28, 0.84, 0.42, 1));
+}
+
+.fa-fade {
+  -webkit-animation-name: fa-fade;
+          animation-name: fa-fade;
+  -webkit-animation-delay: var(--fa-animation-delay, 0s);
+          animation-delay: var(--fa-animation-delay, 0s);
+  -webkit-animation-direction: var(--fa-animation-direction, normal);
+          animation-direction: var(--fa-animation-direction, normal);
+  -webkit-animation-duration: var(--fa-animation-duration, 1s);
+          animation-duration: var(--fa-animation-duration, 1s);
+  -webkit-animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+          animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+  -webkit-animation-timing-function: var(--fa-animation-timing, cubic-bezier(0.4, 0, 0.6, 1));
+          animation-timing-function: var(--fa-animation-timing, cubic-bezier(0.4, 0, 0.6, 1));
+}
+
+.fa-beat-fade {
+  -webkit-animation-name: fa-beat-fade;
+          animation-name: fa-beat-fade;
+  -webkit-animation-delay: var(--fa-animation-delay, 0s);
+          animation-delay: var(--fa-animation-delay, 0s);
+  -webkit-animation-direction: var(--fa-animation-direction, normal);
+          animation-direction: var(--fa-animation-direction, normal);
+  -webkit-animation-duration: var(--fa-animation-duration, 1s);
+          animation-duration: var(--fa-animation-duration, 1s);
+  -webkit-animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+          animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+  -webkit-animation-timing-function: var(--fa-animation-timing, cubic-bezier(0.4, 0, 0.6, 1));
+          animation-timing-function: var(--fa-animation-timing, cubic-bezier(0.4, 0, 0.6, 1));
+}
+
+.fa-flip {
+  -webkit-animation-name: fa-flip;
+          animation-name: fa-flip;
+  -webkit-animation-delay: var(--fa-animation-delay, 0s);
+          animation-delay: var(--fa-animation-delay, 0s);
+  -webkit-animation-direction: var(--fa-animation-direction, normal);
+          animation-direction: var(--fa-animation-direction, normal);
+  -webkit-animation-duration: var(--fa-animation-duration, 1s);
+          animation-duration: var(--fa-animation-duration, 1s);
+  -webkit-animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+          animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+  -webkit-animation-timing-function: var(--fa-animation-timing, ease-in-out);
+          animation-timing-function: var(--fa-animation-timing, ease-in-out);
+}
+
+.fa-shake {
+  -webkit-animation-name: fa-shake;
+          animation-name: fa-shake;
+  -webkit-animation-delay: var(--fa-animation-delay, 0s);
+          animation-delay: var(--fa-animation-delay, 0s);
+  -webkit-animation-direction: var(--fa-animation-direction, normal);
+          animation-direction: var(--fa-animation-direction, normal);
+  -webkit-animation-duration: var(--fa-animation-duration, 1s);
+          animation-duration: var(--fa-animation-duration, 1s);
+  -webkit-animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+          animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+  -webkit-animation-timing-function: var(--fa-animation-timing, linear);
+          animation-timing-function: var(--fa-animation-timing, linear);
+}
+
+.fa-spin {
+  -webkit-animation-name: fa-spin;
+          animation-name: fa-spin;
+  -webkit-animation-delay: var(--fa-animation-delay, 0s);
+          animation-delay: var(--fa-animation-delay, 0s);
+  -webkit-animation-direction: var(--fa-animation-direction, normal);
+          animation-direction: var(--fa-animation-direction, normal);
+  -webkit-animation-duration: var(--fa-animation-duration, 2s);
+          animation-duration: var(--fa-animation-duration, 2s);
+  -webkit-animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+          animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+  -webkit-animation-timing-function: var(--fa-animation-timing, linear);
+          animation-timing-function: var(--fa-animation-timing, linear);
+}
+
+.fa-spin-reverse {
+  --fa-animation-direction: reverse;
+}
+
+.fa-pulse,
+.fa-spin-pulse {
+  -webkit-animation-name: fa-spin;
+          animation-name: fa-spin;
+  -webkit-animation-direction: var(--fa-animation-direction, normal);
+          animation-direction: var(--fa-animation-direction, normal);
+  -webkit-animation-duration: var(--fa-animation-duration, 1s);
+          animation-duration: var(--fa-animation-duration, 1s);
+  -webkit-animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+          animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+  -webkit-animation-timing-function: var(--fa-animation-timing, steps(8));
+          animation-timing-function: var(--fa-animation-timing, steps(8));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fa-beat,
+.fa-bounce,
+.fa-fade,
+.fa-beat-fade,
+.fa-flip,
+.fa-pulse,
+.fa-shake,
+.fa-spin,
+.fa-spin-pulse {
+    -webkit-animation-delay: -1ms;
+            animation-delay: -1ms;
+    -webkit-animation-duration: 1ms;
+            animation-duration: 1ms;
+    -webkit-animation-iteration-count: 1;
+            animation-iteration-count: 1;
+    -webkit-transition-delay: 0s;
+            transition-delay: 0s;
+    -webkit-transition-duration: 0s;
+            transition-duration: 0s;
+  }
+}
+@-webkit-keyframes fa-beat {
+  0%, 90% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  45% {
+    -webkit-transform: scale(var(--fa-beat-scale, 1.25));
+            transform: scale(var(--fa-beat-scale, 1.25));
+  }
+}
+@keyframes fa-beat {
+  0%, 90% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  45% {
+    -webkit-transform: scale(var(--fa-beat-scale, 1.25));
+            transform: scale(var(--fa-beat-scale, 1.25));
+  }
+}
+@-webkit-keyframes fa-bounce {
+  0% {
+    -webkit-transform: scale(1, 1) translateY(0);
+            transform: scale(1, 1) translateY(0);
+  }
+  10% {
+    -webkit-transform: scale(var(--fa-bounce-start-scale-x, 1.1), var(--fa-bounce-start-scale-y, 0.9)) translateY(0);
+            transform: scale(var(--fa-bounce-start-scale-x, 1.1), var(--fa-bounce-start-scale-y, 0.9)) translateY(0);
+  }
+  30% {
+    -webkit-transform: scale(var(--fa-bounce-jump-scale-x, 0.9), var(--fa-bounce-jump-scale-y, 1.1)) translateY(var(--fa-bounce-height, -0.5em));
+            transform: scale(var(--fa-bounce-jump-scale-x, 0.9), var(--fa-bounce-jump-scale-y, 1.1)) translateY(var(--fa-bounce-height, -0.5em));
+  }
+  50% {
+    -webkit-transform: scale(var(--fa-bounce-land-scale-x, 1.05), var(--fa-bounce-land-scale-y, 0.95)) translateY(0);
+            transform: scale(var(--fa-bounce-land-scale-x, 1.05), var(--fa-bounce-land-scale-y, 0.95)) translateY(0);
+  }
+  57% {
+    -webkit-transform: scale(1, 1) translateY(var(--fa-bounce-rebound, -0.125em));
+            transform: scale(1, 1) translateY(var(--fa-bounce-rebound, -0.125em));
+  }
+  64% {
+    -webkit-transform: scale(1, 1) translateY(0);
+            transform: scale(1, 1) translateY(0);
+  }
+  100% {
+    -webkit-transform: scale(1, 1) translateY(0);
+            transform: scale(1, 1) translateY(0);
+  }
+}
+@keyframes fa-bounce {
+  0% {
+    -webkit-transform: scale(1, 1) translateY(0);
+            transform: scale(1, 1) translateY(0);
+  }
+  10% {
+    -webkit-transform: scale(var(--fa-bounce-start-scale-x, 1.1), var(--fa-bounce-start-scale-y, 0.9)) translateY(0);
+            transform: scale(var(--fa-bounce-start-scale-x, 1.1), var(--fa-bounce-start-scale-y, 0.9)) translateY(0);
+  }
+  30% {
+    -webkit-transform: scale(var(--fa-bounce-jump-scale-x, 0.9), var(--fa-bounce-jump-scale-y, 1.1)) translateY(var(--fa-bounce-height, -0.5em));
+            transform: scale(var(--fa-bounce-jump-scale-x, 0.9), var(--fa-bounce-jump-scale-y, 1.1)) translateY(var(--fa-bounce-height, -0.5em));
+  }
+  50% {
+    -webkit-transform: scale(var(--fa-bounce-land-scale-x, 1.05), var(--fa-bounce-land-scale-y, 0.95)) translateY(0);
+            transform: scale(var(--fa-bounce-land-scale-x, 1.05), var(--fa-bounce-land-scale-y, 0.95)) translateY(0);
+  }
+  57% {
+    -webkit-transform: scale(1, 1) translateY(var(--fa-bounce-rebound, -0.125em));
+            transform: scale(1, 1) translateY(var(--fa-bounce-rebound, -0.125em));
+  }
+  64% {
+    -webkit-transform: scale(1, 1) translateY(0);
+            transform: scale(1, 1) translateY(0);
+  }
+  100% {
+    -webkit-transform: scale(1, 1) translateY(0);
+            transform: scale(1, 1) translateY(0);
+  }
+}
+@-webkit-keyframes fa-fade {
+  50% {
+    opacity: var(--fa-fade-opacity, 0.4);
+  }
+}
+@keyframes fa-fade {
+  50% {
+    opacity: var(--fa-fade-opacity, 0.4);
+  }
+}
+@-webkit-keyframes fa-beat-fade {
+  0%, 100% {
+    opacity: var(--fa-beat-fade-opacity, 0.4);
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    -webkit-transform: scale(var(--fa-beat-fade-scale, 1.125));
+            transform: scale(var(--fa-beat-fade-scale, 1.125));
+  }
+}
+@keyframes fa-beat-fade {
+  0%, 100% {
+    opacity: var(--fa-beat-fade-opacity, 0.4);
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    -webkit-transform: scale(var(--fa-beat-fade-scale, 1.125));
+            transform: scale(var(--fa-beat-fade-scale, 1.125));
+  }
+}
+@-webkit-keyframes fa-flip {
+  50% {
+    -webkit-transform: rotate3d(var(--fa-flip-x, 0), var(--fa-flip-y, 1), var(--fa-flip-z, 0), var(--fa-flip-angle, -180deg));
+            transform: rotate3d(var(--fa-flip-x, 0), var(--fa-flip-y, 1), var(--fa-flip-z, 0), var(--fa-flip-angle, -180deg));
+  }
+}
+@keyframes fa-flip {
+  50% {
+    -webkit-transform: rotate3d(var(--fa-flip-x, 0), var(--fa-flip-y, 1), var(--fa-flip-z, 0), var(--fa-flip-angle, -180deg));
+            transform: rotate3d(var(--fa-flip-x, 0), var(--fa-flip-y, 1), var(--fa-flip-z, 0), var(--fa-flip-angle, -180deg));
+  }
+}
+@-webkit-keyframes fa-shake {
+  0% {
+    -webkit-transform: rotate(-15deg);
+            transform: rotate(-15deg);
+  }
+  4% {
+    -webkit-transform: rotate(15deg);
+            transform: rotate(15deg);
+  }
+  8%, 24% {
+    -webkit-transform: rotate(-18deg);
+            transform: rotate(-18deg);
+  }
+  12%, 28% {
+    -webkit-transform: rotate(18deg);
+            transform: rotate(18deg);
+  }
+  16% {
+    -webkit-transform: rotate(-22deg);
+            transform: rotate(-22deg);
+  }
+  20% {
+    -webkit-transform: rotate(22deg);
+            transform: rotate(22deg);
+  }
+  32% {
+    -webkit-transform: rotate(-12deg);
+            transform: rotate(-12deg);
+  }
+  36% {
+    -webkit-transform: rotate(12deg);
+            transform: rotate(12deg);
+  }
+  40%, 100% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+}
+@keyframes fa-shake {
+  0% {
+    -webkit-transform: rotate(-15deg);
+            transform: rotate(-15deg);
+  }
+  4% {
+    -webkit-transform: rotate(15deg);
+            transform: rotate(15deg);
+  }
+  8%, 24% {
+    -webkit-transform: rotate(-18deg);
+            transform: rotate(-18deg);
+  }
+  12%, 28% {
+    -webkit-transform: rotate(18deg);
+            transform: rotate(18deg);
+  }
+  16% {
+    -webkit-transform: rotate(-22deg);
+            transform: rotate(-22deg);
+  }
+  20% {
+    -webkit-transform: rotate(22deg);
+            transform: rotate(22deg);
+  }
+  32% {
+    -webkit-transform: rotate(-12deg);
+            transform: rotate(-12deg);
+  }
+  36% {
+    -webkit-transform: rotate(12deg);
+            transform: rotate(12deg);
+  }
+  40%, 100% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+}
+@-webkit-keyframes fa-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+@keyframes fa-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+.fa-rotate-90 {
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
+
+.fa-rotate-180 {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+
+.fa-rotate-270 {
+  -webkit-transform: rotate(270deg);
+          transform: rotate(270deg);
+}
+
+.fa-flip-horizontal {
+  -webkit-transform: scale(-1, 1);
+          transform: scale(-1, 1);
+}
+
+.fa-flip-vertical {
+  -webkit-transform: scale(1, -1);
+          transform: scale(1, -1);
+}
+
+.fa-flip-both,
+.fa-flip-horizontal.fa-flip-vertical {
+  -webkit-transform: scale(-1, -1);
+          transform: scale(-1, -1);
+}
+
+.fa-rotate-by {
+  -webkit-transform: rotate(var(--fa-rotate-angle, none));
+          transform: rotate(var(--fa-rotate-angle, none));
+}
+
+.fa-stack {
+  display: inline-block;
+  vertical-align: middle;
+  height: 2em;
+  position: relative;
+  width: 2.5em;
+}
+
+.fa-stack-1x,
+.fa-stack-2x {
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: var(--fa-stack-z-index, auto);
+}
+
+.svg-inline--fa.fa-stack-1x {
+  height: 1em;
+  width: 1.25em;
+}
+.svg-inline--fa.fa-stack-2x {
+  height: 2em;
+  width: 2.5em;
+}
+
+.fa-inverse {
+  color: var(--fa-inverse, #fff);
+}
+
+.sr-only,
+.fa-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.sr-only-focusable:not(:focus),
+.fa-sr-only-focusable:not(:focus) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.svg-inline--fa .fa-primary {
+  fill: var(--fa-primary-color, currentColor);
+  opacity: var(--fa-primary-opacity, 1);
+}
+
+.svg-inline--fa .fa-secondary {
+  fill: var(--fa-secondary-color, currentColor);
+  opacity: var(--fa-secondary-opacity, 0.4);
+}
+
+.svg-inline--fa.fa-swap-opacity .fa-primary {
+  opacity: var(--fa-secondary-opacity, 0.4);
+}
+
+.svg-inline--fa.fa-swap-opacity .fa-secondary {
+  opacity: var(--fa-primary-opacity, 1);
+}
+
+.svg-inline--fa mask .fa-primary,
+.svg-inline--fa mask .fa-secondary {
+  fill: black;
+}
+
+.fad.fa-inverse,
+.fa-duotone.fa-inverse {
+  color: var(--fa-inverse, #fff);
+}</style><link rel="icon" property="og:image" href="https://admin.chhayakart.com/storage/logo/1680098508_37047.png"><meta prefix="og: http://ogp.me/ns#" property="og:image" content="https://admin.chhayakart.com/storage/logo/1680098508_37047.png"><meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1"><meta name="theme-color" content="#000000"><meta name="author" content="ChhayaKart"><link rel="apple-touch-icon" href="https://chhayakart.com/public/chhayakert-pink-mini-logo.png"><link rel="manifest" href="https://chhayakart.com/manifest.json"><link rel="stylesheet" href="./wafers_files/bootstrap-icons.css"><title>ChhayaKart | Gaon Ki Dukaan</title><script async="" src="./wafers_files/clarity.js.download"></script><script async="" src="./wafers_files/ne0rynpllk"></script><script type="text/javascript" async="" src="./wafers_files/web-sdk.js.download"></script><script src="./wafers_files/249093771346059" async=""></script><script async="" src="./wafers_files/fbevents.js.download"></script><script src="./wafers_files/checkout.js.download"></script><style type="text/css">
+          @-webkit-keyframes phonepeFadein1777099016412 {
+            from {
+              opacity: 0;
+            }
+            to {
+              opacity: 1;
+            }
+          }
+          @-o-keyframes phonepeFadein1777099016412 {
+            from {
+              opacity: 0;
+            }
+            to {
+              opacity: 1;
+            }
+          }
+          @-webkit-keyframes phonepeBottomToTop1777099016413 {
+            from {
+              bottom: -120%;
+            }
+            to {
+              bottom: 0;
+            }
+          }
+          @-o-keyframes phonepeBottomToTop1777099016413 {
+            from {
+              bottom: -120%;
+            }
+            to {
+              bottom: 0;
+            }
+          }
+  
+          ._phonepeSDK1777099016414.frameWrap1777099016415  {
+            height:100%;
+            width:100%;
+            position:fixed;
+            left:0;
+            top:0;
+            border:none;
+            background: rgba(0,0,0,0.4);
+            z-index:2147000000;
+            animation: 500ms phonepeFadein1777099016412;
+          }
+          ._phonepeSDK1777099016414 .frame1777099016419, 
+          ._phonepeSDK1777099016414.frameWrap1777099016415.hide1777099016420 {
+            display: none;
+          }
+  
+          ._phonepeSDK1777099016414 .frame1777099016416 {
+            height: 100%;
+            max-height: 640px !important;
+            z-index: 2147000000;
+            border: none;
+            position: fixed;
+            width: 100% !important;
+            max-width: 360px !important;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 3px 3px 25px -3px rgba(0,0,0,0.45);
+            border-radius: 10px;
+            background-color: white;
+          }
+          ._phonepeSDK1777099016414 .frame1777099016416.mobile1777099016418 {
+            left: 0;
+            top: auto;
+            bottom: 0;
+            max-height: 564px;
+            max-width: 600px !important;
+            transform: translateY(0);
+            background-color: white;
+            animation: 280ms phonepeBottomToTop1777099016413;
+            border-radius: 10px 10px 0 0;
+          }
+          ._phonepeSDK1777099016414 .frame1777099016416.mobile1777099016418.transparentiframe1777099016417 {
+            max-height: 190px;
+            background-color: transparent;
+          }
+          .hidden1777099016421 {
+            display: none;
+          }
+          
+          ._phonepeSDK1777099016414 .frame1777099016416.v3DesktopContainer1777099016422 {
+            max-height: 731px !important;
+            max-width: 1194px !important;
+            border-radius: 24px !important;
+          }
+          </style><script type="text/javascript">!function(n){if("/"===n.search[1]){var a=n.search.slice(1).split("&").map((function(n){return n.replace(/~and~/g,"&")})).join("?");window.history.replaceState(null,null,n.pathname.slice(0,-1)+a+n.hash)}}(window.location)</script><script async="" src="./wafers_files/js"></script><script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-0P5RYT88PF"),gtag("config","AW-11036772341")</script><script>!function(e,t,n,c,o,a,f){e.fbq||(o=e.fbq=function(){o.callMethod?o.callMethod.apply(o,arguments):o.queue.push(arguments)},e._fbq||(e._fbq=o),o.push=o,o.loaded=!0,o.version="2.0",o.queue=[],(a=t.createElement(n)).async=!0,a.src="https://connect.facebook.net/en_US/fbevents.js",(f=t.getElementsByTagName(n)[0]).parentNode.insertBefore(a,f))}(window,document,"script"),fbq("init","249093771346059"),fbq("track","PageView")</script><noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=249093771346059&ev=PageView&noscript=1"/></noscript><script>!function(e,t,a,s,n){e.scSdkId="aHnL0C9oii",e[s]=e[s]||[],e.scq=function(t,a,n){var c=n||{};e[s].push({eventName:t,eventType:a,meta:c,eventFireTs:Date.now()})},e.scq("PAGE_VIEW","AUTO",{pageUrl:e.location.href});var c=t.createElement(a);c.type="text/javascript",c.async=!0,c.src="https://sc-events-sdk.sharechat.com/web-sdk.js";var r=t.getElementsByTagName(a)[0];r.parentNode.insertBefore(c,r)}(window,document,"script","scLayer")</script><script type="text/javascript">!function(e,t,n,c,r,a,s){e[n]=e[n]||function(){(e[n].q=e[n].q||[]).push(arguments)},(a=t.createElement(c)).async=1,a.src="https://www.clarity.ms/tag/ne0rynpllk",(s=t.getElementsByTagName(c)[0]).parentNode.insertBefore(a,s)}(window,document,"clarity","script")</script><script defer="defer" src="./wafers_files/main.79557aba.js.download"></script><link href="./wafers_files/main.33e6bf86.css" rel="stylesheet"><meta name="keywords" content="chhayakart,self-help groups,women entrepreneurs,rural manufactures products,gao ki dukaan,desi dukaan" data-react-helmet="true"><meta name="description" content="Self-Help Groups, Women Entrepreneurs &amp; Rural Manufacturers Ecommerce Platform" data-react-helmet="true"><script type="text/javascript" async="" src="./wafers_files/f.txt"></script><script type="text/javascript" async="" src="./wafers_files/f(1).txt"></script><script type="text/javascript" async="" src="./wafers_files/f(2).txt"></script><script type="text/javascript" async="" src="./wafers_files/f(3).txt"></script><script type="text/javascript" async="" src="./wafers_files/f(4).txt"></script><script type="text/javascript" async="" src="./wafers_files/f(5).txt"></script></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id="root"><div class="h-auto"><div class="dskp-header_headerWrapper__vbSp8"><div class="container dskp-header_rowWrapper__qcP1n"><img src="./wafers_files/chhayakart-white-mini-logo.23a0befd28547fa1affc.png" class="dskp-header_logo__GxBvz" alt="ck-logo"><div class="dskp-header_linkWrapper__xoY8a"><a href="https://chhayakart.com/" class="dskp-header_link__n3uCW">Home</a><a href="https://chhayakart.com/sub-category/94" class="dskp-header_link__n3uCW">Categories</a><div class="dskp-header_dropDown__DZG-m"><p class="dskp-header_link__n3uCW">About Us</p></div><div class="dskp-header_dropDown__DZG-m"><p class="dskp-header_link__n3uCW">Sign In</p></div><div class="dskp-header_iconsWrapper__9+9Uk"><header class="site-header  desktop-shadow-disable mobile-shadow-disable bg-white  mobile-nav-enable"><div class="header-main  w-100"><div class="container"><div class="d-flex row-reverse justify-content-lg-between justify-content-center"><div class="d-flex col-md-3 w-auto order-3  justify-content-end align-items-center"><button aria-label="cart" type="button" class="icon mx-4 me-sm-5 position-relative" data-bs-toggle="offcanvas" data-bs-target="#cartoffcanvasExample" aria-controls="cartoffcanvasExample"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><circle cx="176" cy="416" r="16" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></circle><circle cx="400" cy="416" r="16" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></circle><path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M48 80h64l48 272h256"></path><path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M160 288h249.44a8 8 0 007.85-6.43l28.8-144a8 8 0 00-7.85-9.57H128"></path></svg></button></div></div></div></div><div tabindex="-1" class="cart-sidebar-container offcanvas offcanvas-end" id="cartoffcanvasExample" aria-labelledby="cartoffcanvasExampleLabel"><div class="cart-sidebar-header-discount"><h3>Additional 12% Cash discount on order above <svg stroke="currentColor" fill="var(--secondary-color )" stroke-width="0" viewBox="0 0 320 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M308 96c6.627 0 12-5.373 12-12V44c0-6.627-5.373-12-12-12H12C5.373 32 0 37.373 0 44v44.748c0 6.627 5.373 12 12 12h85.28c27.308 0 48.261 9.958 60.97 27.252H12c-6.627 0-12 5.373-12 12v40c0 6.627 5.373 12 12 12h158.757c-6.217 36.086-32.961 58.632-74.757 58.632H12c-6.627 0-12 5.373-12 12v53.012c0 3.349 1.4 6.546 3.861 8.818l165.052 152.356a12.001 12.001 0 0 0 8.139 3.182h82.562c10.924 0 16.166-13.408 8.139-20.818L116.871 319.906c76.499-2.34 131.144-53.395 138.318-127.906H308c6.627 0 12-5.373 12-12v-40c0-6.627-5.373-12-12-12h-58.69c-3.486-11.541-8.28-22.246-14.252-32H308z"></path></svg>9,999<br>Additional 8% Cash discount on order above<svg stroke="currentColor" fill="var(--secondary-color )" stroke-width="0" viewBox="0 0 320 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M308 96c6.627 0 12-5.373 12-12V44c0-6.627-5.373-12-12-12H12C5.373 32 0 37.373 0 44v44.748c0 6.627 5.373 12 12 12h85.28c27.308 0 48.261 9.958 60.97 27.252H12c-6.627 0-12 5.373-12 12v40c0 6.627 5.373 12 12 12h158.757c-6.217 36.086-32.961 58.632-74.757 58.632H12c-6.627 0-12 5.373-12 12v53.012c0 3.349 1.4 6.546 3.861 8.818l165.052 152.356a12.001 12.001 0 0 0 8.139 3.182h82.562c10.924 0 16.166-13.408 8.139-20.818L116.871 319.906c76.499-2.34 131.144-53.395 138.318-127.906H308c6.627 0 12-5.373 12-12v-40c0-6.627-5.373-12-12-12h-58.69c-3.486-11.541-8.28-22.246-14.252-32H308z"></path></svg>4,999</h3></div><div class="cart-sidebar-header"><h5>your cart</h5><button type="button" class="close-canvas" data-bs-dismiss="offcanvas" aria-label="Close"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" fill-rule="evenodd" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64Zm0 76c-205.4 0-372 166.6-372 372s166.6 372 372 372 372-166.6 372-372-166.6-372-372-372Zm128.013 198.826c.023.007.042.018.083.059l45.02 45.019c.04.04.05.06.058.083a.118.118 0 0 1 0 .07c-.007.022-.018.041-.059.082L557.254 512l127.861 127.862a.268.268 0 0 1 .05.06l.009.023a.118.118 0 0 1 0 .07c-.007.022-.018.041-.059.082l-45.019 45.02c-.04.04-.06.05-.083.058a.118.118 0 0 1-.07 0c-.022-.007-.041-.018-.082-.059L512 557.254 384.14 685.115c-.042.041-.06.052-.084.059a.118.118 0 0 1-.07 0c-.022-.007-.041-.018-.082-.059l-45.02-45.019c-.04-.04-.05-.06-.058-.083a.118.118 0 0 1 0-.07c.007-.022.018-.041.059-.082L466.745 512l-127.86-127.86a.268.268 0 0 1-.05-.061l-.009-.023a.118.118 0 0 1 0-.07c.007-.022.018-.041.059-.082l45.019-45.02c.04-.04.06-.05.083-.058a.118.118 0 0 1 .07 0c.022.007.041.018.082.059L512 466.745l127.862-127.86c.04-.041.06-.052.083-.059a.118.118 0 0 1 .07 0Z"></path></svg></button></div><div class="empty-cart"><img data-src="/static/media/Empty_Cart.af1329686200bbfafa7272cf53815f96.svg" alt="empty-cart" class=" ls-is-cached lazyloaded" src="./wafers_files/Empty_Cart.af1329686200bbfafa7272cf53815f96.svg"><p>Your Cart is empty</p><span>You have no items in your shopping cart.</span><span>Let's go buy something!</span><button type="button" class="close-canvas" data-bs-dismiss="offcanvas" aria-label="Close">start shopping</button></div></div></header></div></div></div></div><main id="main" class="main-app false"><div><div class="main-container_searchWrapper__kt6Nj"><h1 class="main-container_searchHeader__S8wKl">Self-Help Groups, Women Entrepreneurs &amp; Rural Manufacturers Products</h1><div class="search-input_searchWrapper__fojny"><div class="search-input_AllIndWrapper__VOmD3"><p class="search-input_AllInd__ZJqJG">All India </p></div><input type="text" id="searchBar" class="search-input_searchInput__zcxOj main-container_searchBar__serYU" placeholder="Delivering 1000+ Products  Across India" autocomplete="off" value=""><div class="search-input_searchBtnWrapper__xkpAz"><p class="search-input_searchBtn__XTiiV">Search</p></div></div></div><div style="background-color: rgb(242, 113, 0); color: white; padding: 10px 0px; font-weight: bold; text-align: center; margin-bottom: 5px; display: block;"><h1 style="padding: 0px; margin: 0px; font-weight: 800; color: white;">FREE DELIVERY FOR ALL PRODUCTS<svg stroke="currentColor" fill="#fff" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="30" width="30" xmlns="http://www.w3.org/2000/svg" style="margin-left: 5px; margin-top: -2px;"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path><path d="M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path><path d="M5 17h-2v-4m-1 -8h11v12m-4 0h6m4 0h2v-6h-8m0 -5h5l3 5"></path><path d="M3 9l4 0"></path></svg></h1></div><div class="container"><div class="category_cardWrapper__qU9HP"><div class="my-2"></div><div class="category_headerWrapper__toFu3"><h1 class="category_header__vesRD">SHOP BY CATEGORY</h1></div><div class="category_categoryWrapper__lRoK9"><div class="category_category__abiio"><div class="category_imageWrapper__icNGN"><img class="category_categoryImg__u6403 ls-is-cached lazyloaded" src="./wafers_files/1764164885_58919.jpg" alt="PAPAD &amp; MORE"></div></div><div class="category_category__abiio"><div class="category_imageWrapper__icNGN"><img class="category_categoryImg__u6403 ls-is-cached lazyloaded" src="./wafers_files/1764164950_26971.jpg" alt="SEASONAL TREND"></div></div><div class="category_category__abiio"><div class="category_imageWrapper__icNGN"><img class="category_categoryImg__u6403 ls-is-cached lazyloaded" src="./wafers_files/1764165057_55400.jpg" alt="INSTANT FOOD"></div></div><div class="category_category__abiio"><div class="category_imageWrapper__icNGN"><img class="category_categoryImg__u6403 ls-is-cached lazyloaded" src="./wafers_files/1764165132_4352.jpg" alt="PUJA SAMAGRI"></div></div><div class="category_category__abiio"><div class="category_imageWrapper__icNGN"><img class="category_categoryImg__u6403 ls-is-cached lazyloaded" src="./wafers_files/1764165193_27142.jpg" alt="MILLET SUPERFOOD"></div></div><div class="category_category__abiio"><div class="category_imageWrapper__icNGN"><img class="category_categoryImg__u6403 ls-is-cached lazyloaded" src="./wafers_files/1764165254_29189.jpg" alt="SNACKS &amp; NAMKEEN"></div></div><div class="category_category__abiio"><div class="category_imageWrapper__icNGN"><img class="category_categoryImg__u6403 ls-is-cached lazyloaded" src="./wafers_files/1764165309_6092.jpg" alt="PICKLES &amp; MORE"></div></div><div class="category_category__abiio"><div class="category_imageWrapper__icNGN"><img class="category_categoryImg__u6403 ls-is-cached lazyloaded" src="./wafers_files/1764165366_47950.jpg" alt="CHUTNEY &amp; MASALA"></div></div><div class="category_category__abiio"><div class="category_imageWrapper__icNGN"><img class="category_categoryImg__u6403 ls-is-cached lazyloaded" src="./wafers_files/1764165434_54883.jpg" alt="SWEETS &amp; MORE"></div></div><div class="category_category__abiio"><div class="category_imageWrapper__icNGN"><img class="category_categoryImg__u6403 ls-is-cached lazyloaded" src="./wafers_files/1764165517_9698.jpg" alt="ORGANIC FOODGRAIN"></div></div><div class="category_category__abiio"><div class="category_imageWrapper__icNGN"><img class="category_categoryImg__u6403 ls-is-cached lazyloaded" src="./wafers_files/1764165567_94531.jpg" alt="JEWELLERY"></div></div><div class="category_category__abiio"><div class="category_imageWrapper__icNGN"><img class="category_categoryImg__u6403 ls-is-cached lazyloaded" src="./wafers_files/1764165613_79940.jpg" alt="HOUSEHOLD"></div></div></div></div></div><div class="container"><div class="container"><div><div class="category-card_cardWrapper__2jbCP"><div class="category-card_headerWrapper__MGB2a"><h1 class="category-card_header__CoWun">SEASONAL TREND</h1></div><div class="category-card_categoryWrapper__kHf7c"><div class="category-card_bodyWrapper__JjEgr"><div class="category-card_subCategoryWrapper__7K3A5"><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1751995412_41433.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">HOMEMADE</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1764777964_85448.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">SPECIAL PAPAD</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1764945191_26569.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">SPECIAL SNACK</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1751994881_51921.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">AYURVEDIC</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1752256555_23078.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">SEASON SNACK</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1730894805_86524.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">COMBO DEALS</p></div></div></div></div></div></div></div><div><div class="category-card_cardWrapper__2jbCP"><div class="category-card_headerWrapper__MGB2a"><h1 class="category-card_header__CoWun">INSTANT FOOD</h1></div><div class="category-card_categoryWrapper__kHf7c"><div class="category-card_bodyWrapper__JjEgr"><div class="category-card_subCategoryWrapper__7K3A5"><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1772042629_1490.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">INSTANT</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1761159713_42420.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">TEA</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1749882444_94437.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">WAFERS</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1750670221_68033.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">PASTA</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1772042097_64287.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">BREAKFAST</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1772042403_34746.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">PREMIX</p></div></div></div></div></div></div></div><div><div class="category-card_cardWrapper__2jbCP"><div class="category-card_headerWrapper__MGB2a"><h1 class="category-card_header__CoWun">PUJA SAMAGRI</h1></div><div class="category-card_categoryWrapper__kHf7c"><div class="category-card_bodyWrapper__JjEgr"><div class="category-card_subCategoryWrapper__7K3A5"><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1722976532_10976.png" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">RUDRAKSHA</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1723136517_39985.webp" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">SAMAGRI</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1756643189_81119.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">GEMS</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1730808479_50060.webp" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">JAP MALA</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1723098423_75643.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">YANTRA</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1723134767_56407.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">IDOL</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1723134508_44886.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">VASTU DECOR</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1723275027_9276.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">ESSENTIAL</p></div></div></div></div></div></div></div><div><div class="category-card_cardWrapper__2jbCP"><div class="category-card_headerWrapper__MGB2a"><h1 class="category-card_header__CoWun">MILLET SUPERFOOD</h1></div><div class="category-card_categoryWrapper__kHf7c"><div class="category-card_bodyWrapper__JjEgr"><div class="category-card_subCategoryWrapper__7K3A5"><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1689679963_96038.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">BREAKFAST</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1689679954_41981.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">SNACKS</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1689679945_99107.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">COOKIES</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1723207848_69442.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">GRAIN &amp; ATTA</p></div></div></div></div></div></div></div><div><div class="category-card_cardWrapper__2jbCP"><div class="category-card_headerWrapper__MGB2a"><h1 class="category-card_header__CoWun">SNACKS &amp; NAMKEEN</h1></div><div class="category-card_categoryWrapper__kHf7c"><div class="category-card_bodyWrapper__JjEgr"><div class="category-card_subCategoryWrapper__7K3A5"><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1763631373_54458.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">DESI SNACK</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1763631421_83382.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">HEALTHY SNACK</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1689679889_70268.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">FARSAN</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1763631400_61728.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">ROASTED SNACK</p></div></div></div></div></div></div></div><div><div class="category-card_cardWrapper__2jbCP"><div class="category-card_headerWrapper__MGB2a"><h1 class="category-card_header__CoWun">PICKLES &amp; MORE</h1></div><div class="category-card_categoryWrapper__kHf7c"><div class="category-card_bodyWrapper__JjEgr"><div class="category-card_subCategoryWrapper__7K3A5"><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1689679866_86750.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">PICKLE</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1689679855_12633.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">SPECIAL PICKLE</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1689679846_21558.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">MURABBA</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1689679837_86215.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">AMLA SPECIAL</p></div></div></div></div></div></div></div><div><div class="category-card_cardWrapper__2jbCP"><div class="category-card_headerWrapper__MGB2a"><h1 class="category-card_header__CoWun">CHUTNEY &amp; MASALA</h1></div><div class="category-card_categoryWrapper__kHf7c"><div class="category-card_bodyWrapper__JjEgr"><div class="category-card_subCategoryWrapper__7K3A5"><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1689679828_32694.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">CHUTNEY</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1689679818_5549.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">SPICES</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1760109873_75261.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">DRY CHILLI</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1762367629_26289.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">MASALA</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1773407800_73097.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">GRAVY</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1776594229_22194.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">POWDER</p></div></div></div></div></div></div></div><div><div class="category-card_cardWrapper__2jbCP"><div class="category-card_headerWrapper__MGB2a"><h1 class="category-card_header__CoWun">SWEETS &amp; MORE</h1></div><div class="category-card_categoryWrapper__kHf7c"><div class="category-card_bodyWrapper__JjEgr"><div class="category-card_subCategoryWrapper__7K3A5"><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1728641364_56802.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">LADDU</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1723228431_11414.png" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">SWEET SNACK</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1723228814_40500.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">CHIKKI</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1723229078_31887.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">COOKIES</p></div></div></div></div></div></div></div><div><div class="category-card_cardWrapper__2jbCP"><div class="category-card_headerWrapper__MGB2a"><h1 class="category-card_header__CoWun">ORGANIC FOODGRAIN</h1></div><div class="category-card_categoryWrapper__kHf7c"><div class="category-card_bodyWrapper__JjEgr"><div class="category-card_subCategoryWrapper__7K3A5"><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1723227317_6068.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">GRAINS</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1689679715_79950.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">RICE</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1723226810_31607.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">ATTA</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1753091594_73963.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">OIL &amp; GHEE</p></div></div></div></div></div></div></div><div><div class="category-card_cardWrapper__2jbCP"><div class="category-card_headerWrapper__MGB2a"><h1 class="category-card_header__CoWun">JEWELLERY</h1></div><div class="category-card_categoryWrapper__kHf7c"><div class="category-card_bodyWrapper__JjEgr"><div class="category-card_subCategoryWrapper__7K3A5"><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1764151473_58646.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">MANGAL SUTRA</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1764151520_49217.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">KANGAN</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1764151606_30020.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">RING</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1764151627_6353.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">NATH</p></div></div></div></div></div></div></div><div><div class="category-card_cardWrapper__2jbCP"><div class="category-card_headerWrapper__MGB2a"><h1 class="category-card_header__CoWun">HOUSEHOLD</h1></div><div class="category-card_categoryWrapper__kHf7c"><div class="category-card_bodyWrapper__JjEgr"><div class="category-card_subCategoryWrapper__7K3A5"><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1764764852_60979.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">TEA / COFFEE</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1713862318_98639.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">GARDEN</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1727805212_4926.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">GODHADI</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1713863014_47334.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">AYURVED</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1764765013_40715.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">BATH, BODY &amp; HAIR</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1776594265_7645.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">BEVERAGES</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1751994542_58115.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">HERBAL</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1763296293_30750.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">DRY FRUITS</p></div></div></div></div></div></div></div><div><div class="category-card_cardWrapper__2jbCP"><div class="category-card_headerWrapper__MGB2a"><h1 class="category-card_header__CoWun">PAPAD &amp; MORE</h1></div><div class="category-card_categoryWrapper__kHf7c"><div class="category-card_bodyWrapper__JjEgr"><div class="category-card_subCategoryWrapper__7K3A5"><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1752065777_29857.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">PAPAD</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1752065796_86968.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">KURDAI</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1752065819_70740.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">SEVIYAN</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1752066065_14948.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">UPWAS Papad</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1752065837_64422.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">CHIPS</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1752066395_81298.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">KHAKRA</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1723368681_42368.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">VADE</p></div></div><div class="category-card_subCategoryCard__bRcq5"><div class="category-card_imageWrapper__7rhNR"><img class="category-card_subCategoryImg__D-96B" src="./wafers_files/1751727016_24429.jpg" alt="Catogery"></div><div class="category-card_cardBody__Jmuja"><p class="category-card_title__T2P1Y">FRYUM</p></div></div></div></div></div></div></div></div></div><div class="container"><div class="container"><div class="get-app_cardWrapper__8tja7"><div><img class="get-app_appImg__etSPZ" src="./wafers_files/phone.0cb174ce10ad37596db5.png" alt="app-img"></div><div><h3 class="get-app_header__L9PHv">Get CHHAYAKART APP</h3><img class="get-app_logoImg__-7Gan" src="./wafers_files/chhayakart-pink-logo.b0daa126b0f797736b3e.png" alt="ckLogo"><a href="https://play.google.com/store/apps/details?id=com.chayakart"><img data-src="/static/media/app-logo.a41e0d2d733f42f75101fea8835ed46a.svg" class="lazyload get-app_appLogo__Jbe61" alt="app-download"></a></div></div></div></div></div><button class="scroll active" type="button" id="toTop"></button></main><div class="new-footer_footerWrapper__fvn9x"><div class="new-footer_subFooter1__LdntH"><p class="new-footer_text__xWYAq">Chhayakart: Empowered Minds, Flourishing Enterprises: Cultivating Success, Growing Together</p></div><div class="container"><div class="new-footer_linksWrapper__uEszI"><div><p class="new-footer_head__5rFWV">Get In Touch</p><p class="new-footer_getInTouch__k2-03">Plot No. 21, ZP Colony,<br>Near Dutt Mandir Chowk, <br> Deopur, Dhule 424005 <br><br>Email:<a class="new-footer_links__P8Wiq" href="mailto:contact@chhayakart.com">contact@chhayakart.com</a></p></div><div><p class="new-footer_head__5rFWV">Categories</p><p class="new-footer_links__P8Wiq">Season Special</p><p class="new-footer_links__P8Wiq">Instant Food</p><p class="new-footer_links__P8Wiq">Millet Superfood</p><p class="new-footer_links__P8Wiq">Organic Foodgrain</p><p class="new-footer_links__P8Wiq">Puja &amp; Prasad</p></div><div><p class="new-footer_head__5rFWV">Essentials </p><p class="new-footer_links__P8Wiq">Cookies</p><p class="new-footer_links__P8Wiq">Fitness Food</p><p class="new-footer_links__P8Wiq">Mom's Essential</p></div><div><p class="new-footer_head__5rFWV">Chatpata</p><p class="new-footer_links__P8Wiq">Snacks &amp; Namkeen</p><p class="new-footer_links__P8Wiq">Chutney &amp; Masala</p><p class="new-footer_links__P8Wiq">Pickels</p></div><div><p class="new-footer_head__5rFWV">Quick Links </p><p class="new-footer_links__P8Wiq">About Us</p><p class="new-footer_links__P8Wiq">Blog</p><p class="new-footer_links__P8Wiq">Chhayakart Terms</p><p class="new-footer_links__P8Wiq">Chhayakart Policies</p><p class="new-footer_links__P8Wiq">Return &amp; Refund</p></div></div></div><div class="new-footer_socialMediaWrapper__tY57m"><a id="whatsappChatIcon" href="https://www.facebook.com/profile.php?id=100092513980810&amp;mibextid=9R9pXO"> <svg stroke="currentColor" fill="white" stroke-width="0" viewBox="0 0 512 512" height="30" width="30" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M480 257.35c0-123.7-100.3-224-224-224s-224 100.3-224 224c0 111.8 81.9 204.47 189 221.29V322.12h-56.89v-64.77H221V208c0-56.13 33.45-87.16 84.61-87.16 24.51 0 50.15 4.38 50.15 4.38v55.13H327.5c-27.81 0-36.51 17.26-36.51 35v42h62.12l-9.92 64.77H291v156.54c107.1-16.81 189-109.48 189-221.31z"></path></svg></a><a id="whatsappChatIcon" href="https://www.instagram.com/chhayakart/"> <svg stroke="currentColor" fill="white" stroke-width="0" viewBox="0 0 512 512" height="30" width="30" xmlns="http://www.w3.org/2000/svg"><path d="M349.33 69.33a93.62 93.62 0 0193.34 93.34v186.66a93.62 93.62 0 01-93.34 93.34H162.67a93.62 93.62 0 01-93.34-93.34V162.67a93.62 93.62 0 0193.34-93.34h186.66m0-37.33H162.67C90.8 32 32 90.8 32 162.67v186.66C32 421.2 90.8 480 162.67 480h186.66C421.2 480 480 421.2 480 349.33V162.67C480 90.8 421.2 32 349.33 32z"></path><path d="M377.33 162.67a28 28 0 1128-28 27.94 27.94 0 01-28 28zM256 181.33A74.67 74.67 0 11181.33 256 74.75 74.75 0 01256 181.33m0-37.33a112 112 0 10112 112 112 112 0 00-112-112z"></path></svg></a><a id="whatsappChatIcon" href="https://in.linkedin.com/company/chhayakart"><svg stroke="currentColor" fill="white" stroke-width="0" viewBox="0 0 512 512" height="30" width="30" xmlns="http://www.w3.org/2000/svg"><path d="M444.17 32H70.28C49.85 32 32 46.7 32 66.89v374.72C32 461.91 49.85 480 70.28 480h373.78c20.54 0 35.94-18.21 35.94-38.39V66.89C480.12 46.7 464.6 32 444.17 32zm-273.3 373.43h-64.18V205.88h64.18zM141 175.54h-.46c-20.54 0-33.84-15.29-33.84-34.43 0-19.49 13.65-34.42 34.65-34.42s33.85 14.82 34.31 34.42c-.01 19.14-13.31 34.43-34.66 34.43zm264.43 229.89h-64.18V296.32c0-26.14-9.34-44-32.56-44-17.74 0-28.24 12-32.91 23.69-1.75 4.2-2.22 9.92-2.22 15.76v113.66h-64.18V205.88h64.18v27.77c9.34-13.3 23.93-32.44 57.88-32.44 42.13 0 74 27.77 74 87.64z"></path></svg></a><a id="whatsappChatIcon" href="https://www.youtube.com/@chhayakart/videos"><svg stroke="currentColor" fill="white" stroke-width="0" viewBox="0 0 512 512" height="30" width="30" xmlns="http://www.w3.org/2000/svg"><path d="M508.64 148.79c0-45-33.1-81.2-74-81.2C379.24 65 322.74 64 265 64h-18c-57.6 0-114.2 1-169.6 3.6C36.6 67.6 3.5 104 3.5 149 1 184.59-.06 220.19 0 255.79q-.15 53.4 3.4 106.9c0 45 33.1 81.5 73.9 81.5 58.2 2.7 117.9 3.9 178.6 3.8q91.2.3 178.6-3.8c40.9 0 74-36.5 74-81.5 2.4-35.7 3.5-71.3 3.4-107q.34-53.4-3.26-106.9zM207 353.89v-196.5l145 98.2z"></path></svg></a><a id="whatsappChatIcon" href="https://twitter.com/chhayakart1"><svg stroke="currentColor" fill="white" stroke-width="0" viewBox="0 0 512 512" height="30" width="30" xmlns="http://www.w3.org/2000/svg"><path d="M496 109.5a201.8 201.8 0 01-56.55 15.3 97.51 97.51 0 0043.33-53.6 197.74 197.74 0 01-62.56 23.5A99.14 99.14 0 00348.31 64c-54.42 0-98.46 43.4-98.46 96.9a93.21 93.21 0 002.54 22.1 280.7 280.7 0 01-203-101.3A95.69 95.69 0 0036 130.4c0 33.6 17.53 63.3 44 80.7A97.5 97.5 0 0135.22 199v1.2c0 47 34 86.1 79 95a100.76 100.76 0 01-25.94 3.4 94.38 94.38 0 01-18.51-1.8c12.51 38.5 48.92 66.5 92.05 67.3A199.59 199.59 0 0139.5 405.6a203 203 0 01-23.5-1.4A278.68 278.68 0 00166.74 448c181.36 0 280.44-147.7 280.44-275.8 0-4.2-.11-8.4-.31-12.5A198.48 198.48 0 00496 109.5z"></path></svg></a></div><div class="new-footer_subFooter__kXfFN"><p class="new-footer_copyRight__y58I2">Copyright © 2023. All Right Reserved By <span class="new-footer_chhayakartTxt__71KYj">Chhayakart</span></p></div></div><div class="Toastify"></div></div></div></body></html>
