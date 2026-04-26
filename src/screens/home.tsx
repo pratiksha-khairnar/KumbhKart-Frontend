@@ -1,5 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
-import { useRouter } from 'expo-router';  // ✅ useRouter hook use karo
+import { useRouter } from 'expo-router'; // ✅ useRouter hook use karo
 import React from 'react';
 import {
   Dimensions,
@@ -39,14 +39,13 @@ const HomeScreen = () => {
             <Text style={styles.navLink}>Categories</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => router.push('/about')}>
-            <Text style={styles.navLink}>About Us</Text>
-          </TouchableOpacity>
+<TouchableOpacity>
+  <Text style={styles.navLink}>About Us</Text>
+</TouchableOpacity>
 
-          <TouchableOpacity onPress={() => router.push('/signin')}>
-            <Text style={styles.navLink}>Sign In</Text>
-          </TouchableOpacity>
-        </View>
+<TouchableOpacity>
+  <Text style={styles.navLink}>Sign In</Text>
+</TouchableOpacity>        </View>
 
         {/* Cart Icon */}
         <TouchableOpacity style={{ marginLeft: 20 }}>
