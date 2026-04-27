@@ -93,47 +93,25 @@ export default function SubCategoryScreen({ categoryId }: { categoryId: any }) {
   const [btnLayout, setBtnLayout] = useState({ x: 0, y: 0, width: 0, height: 0 });
   const aboutBtnRef = useRef<View>(null);
 
+  const filteredProducts = ALL_PRODUCTS.filter(p => p.tab === activeTab);
+
   const toggleWish = (id: string) => {
     setWishlist(prev =>
       prev.includes(id) ? prev.filter(w => w !== id) : [...prev, id]
     );
   };
 
-  // ✅ Open Dropdown Function
-  const openDropdown = () => {
-    if (aboutBtnRef.current) {
-      aboutBtnRef.current.measure((_fx, _fy, width, height, px, py) => {
-        setBtnLayout({ x: px, y: py, width, height });
-        setDropdownVisible(true);
-      });
-    }
-  };
-
-  // Horizontal card — Image LEFT, Info RIGHT
   const renderProduct = ({ item }: any) => (
     <View style={styles.card}>
-
-      {/* LEFT — Food Image */}
-      <Image
-        source={{ uri: item.img }}
-        style={styles.productImage}
-        resizeMode="cover"
-      />
-
-      {/* RIGHT — Product Info */}
+      <Image source={{ uri: item.img }} style={styles.productImage} resizeMode="cover" />
       <View style={styles.cardInfo}>
         <Text style={styles.productName} numberOfLines={3}>{item.name}</Text>
-
-        {/* Price Row */}
         <View style={styles.priceRow}>
           <Text style={styles.price}>₹{item.price} </Text>
           <Text style={styles.mrp}>₹{item.mrp} </Text>
           <Text style={styles.discount}>({item.discount}% Off)</Text>
         </View>
-
         <Text style={styles.weight}>{item.weight}</Text>
-
-        {/* Add + Heart */}
         <View style={styles.btnRow}>
           <TouchableOpacity style={styles.addBtn}>
             <Text style={styles.addText}>Add</Text>
@@ -147,7 +125,6 @@ export default function SubCategoryScreen({ categoryId }: { categoryId: any }) {
           </TouchableOpacity>
         </View>
       </View>
-
     </View>
   );
 
@@ -230,15 +207,9 @@ export default function SubCategoryScreen({ categoryId }: { categoryId: any }) {
 
       <View style={styles.sectionGap} />
 
-      {/* ============================== */}
-      {/* SECTION 2 — CATEGORY BUTTONS  */}
-      {/* ============================== */}
+      {/* TABS */}
       <View style={styles.tabsSection}>
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.tabsContent}
-        >
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.tabsContent}>
           {TABS.map(tab => (
             <TouchableOpacity
               key={tab}
@@ -259,11 +230,13 @@ export default function SubCategoryScreen({ categoryId }: { categoryId: any }) {
       {/* SECTION 3 — PRODUCT LIST      */}
       {/* ============================== */}
       <FlatList
-        data={PRODUCTS}
+        data={filteredProducts}
         numColumns={3}
         keyExtractor={item => item.id}
         renderItem={renderProduct}
         contentContainerStyle={styles.grid}
+        columnWrapperStyle={{ justifyContent: 'flex-start' }}
+        key={activeTab}
       />
 
     </View>
@@ -272,13 +245,7 @@ export default function SubCategoryScreen({ categoryId }: { categoryId: any }) {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#EFEFEF' },
-
-  sectionGap: {
-    height: 10,
-    backgroundColor: '#EFEFEF',
-  },
-
-  /* ---- NAVBAR ---- */
+  sectionGap: { height: 10, backgroundColor: '#EFEFEF' },
   header: {
     backgroundColor: '#db1c07', // ✅ Deep Red (was #F36D00 Orange)
     flexDirection: 'row',
@@ -293,133 +260,25 @@ const styles = StyleSheet.create({
     elevation: 8,
   },
   logo: { width: 56, height: 56 },
-  navLinksContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    flex: 1,
-    justifyContent: 'flex-end',
-  },
+  navLinksContainer: { flexDirection: 'row', alignItems: 'center', flex: 1, justifyContent: 'flex-end' },
   navItem: { paddingHorizontal: 18, paddingVertical: 8 },
   navLink: { color: 'white', fontSize: 15, fontWeight: '600', letterSpacing: 0.4 },
-  
-  // ✅ About Us Button with Dropdown
-  aboutBtn: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginLeft: 18,
-  },
-  
-  cartBtn: {
-    marginLeft: 24,
-    backgroundColor: 'rgba(255,255,255,0.25)',
-    borderRadius: 50,
-    padding: 8,
-  },
-
-  /* ✅ DROPDOWN STYLES */
-  backdrop: { flex: 1, backgroundColor: 'transparent' },
-  dropdownMenu: {
-    position: 'absolute',
-    width: 210,
-    backgroundColor: '#fff',
-    borderRadius: 8,
-    shadowColor: '#000',
-    shadowOpacity: 0.18,
-    shadowRadius: 10,
-    elevation: 12,
-    overflow: 'hidden',
-    borderWidth: 1,
-    borderColor: '#f0f0f0',
-    zIndex: 1000,
-  },
-  dropdownItem: {
-    paddingVertical: 14,
-    paddingHorizontal: 20,
-    backgroundColor: '#fff',
-  },
-  dropdownBorder: { borderBottomWidth: 1, borderBottomColor: '#f0f0f0' },
-  dropdownText: { fontSize: 14, color: '#333', fontWeight: '500' },
-
-  /* ---- TABS ---- */
-  tabsSection: {
-    backgroundColor: '#ffffff',
-    paddingVertical: 14,
-    paddingHorizontal: 12,
-    shadowColor: '#000',
-    shadowOpacity: 0.06,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-  tabsContent: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 12,
-    paddingHorizontal: 4,
-  },
-  tabBtn: {
-    width: 140,
-    height: 44,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 1.5,
-    borderColor: '#db1c07', // ✅ Deep Red (was #F36D00)
-    borderRadius: 6,
-    backgroundColor: '#fff',
-  },
-  tabBtnActive: {
-    backgroundColor: '#db1c07', // ✅ Deep Red (was #F36D00)
-    borderColor: '#db1c07',
-  },
-  tabBtnText: {
-    fontSize: 13,
-    fontWeight: '700',
-    color: '#db1c07', // ✅ Deep Red (was #F36D00)
-    letterSpacing: 0.8,
-    textTransform: 'uppercase',
-  },
+  cartBtn: { marginLeft: 24, backgroundColor: 'rgba(255,255,255,0.25)', borderRadius: 50, padding: 8 },
+  tabsSection: { backgroundColor: '#ffffff', paddingVertical: 14, paddingHorizontal: 15, shadowColor: '#000', shadowOpacity: 0.06, shadowRadius: 4, elevation: 3 },
+  tabsContent: { flexDirection: 'row', alignItems: 'center', gap: 12, paddingHorizontal: 4 },
+  tabBtn: { width: 180, height: 44, justifyContent: 'center', alignItems: 'center', borderWidth: 1.5, borderColor: '#db1c07', borderRadius: 6, backgroundColor: '#fff' },
+  tabBtnActive: { backgroundColor: '#db1c07', borderColor: '#db1c07' },
+  tabBtnText: { fontSize: 13, fontWeight: '700', color: '#db1c07', letterSpacing: 0.8, textTransform: 'uppercase' },
   tabBtnTextActive: { color: '#ffffff' },
-
-  /* ---- PRODUCT CARDS ---- */
   grid: { padding: 10 },
 
-  card: {
-    flex: 1,
-    margin: 6,
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    overflow: 'hidden',
-    flexDirection: 'row',
-    shadowColor: '#000',
-    shadowOpacity: 0.08,
-    shadowRadius: 5,
-    elevation: 3,
-    minHeight: 180,
-  },
+  // ✅ flex:1 hataya, fixed width '31%' diya
+  card: { width: '31%', margin: 6, backgroundColor: '#fff', borderRadius: 10, overflow: 'hidden', flexDirection: 'row', shadowColor: '#000', shadowOpacity: 0.08, shadowRadius: 5, elevation: 3, minHeight: 180 },
 
-  productImage: {
-    width: 100,
-    height: '100%',
-    backgroundColor: '#f5f5f5',
-  },
-
-  cardInfo: {
-    flex: 1,
-    padding: 10,
-    justifyContent: 'space-between',
-  },
-  productName: {
-    fontSize: 12,
-    fontWeight: '600',
-    color: '#222',
-    lineHeight: 17,
-    marginBottom: 4,
-  },
-  priceRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    flexWrap: 'wrap',
-    marginBottom: 2,
-  },
+  productImage: { width: 140, height: '100%', backgroundColor: '#f5f5f5' },
+  cardInfo: { flex: 1, padding: 10, justifyContent: 'space-between' },
+  productName: { fontSize: 12, fontWeight: '600', color: '#222', lineHeight: 17, marginBottom: 4 },
+  priceRow: { flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', marginBottom: 2 },
   price: { fontSize: 13, fontWeight: 'bold', color: '#111' },
   mrp: { fontSize: 11, color: '#999', textDecorationLine: 'line-through' },
   discount: { fontSize: 10, color: '#777' },
