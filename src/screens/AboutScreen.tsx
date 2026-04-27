@@ -1,4 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
 import React, { useRef, useState } from 'react';
 import {
@@ -10,11 +11,13 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  TextInput,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
 } from 'react-native';
 
-// ✅ About Dropdown Items (Same as HomeScreen)
+// ✅ About Dropdown Items
 const ABOUT_DROPDOWN = [
   { label: 'About Us',           route: '/about' },
   { label: 'Blog',               route: '/blog' },
@@ -60,25 +63,70 @@ const SOCIAL = [
 export default function AboutScreen() {
   const router = useRouter();
   
-  // ✅ Dropdown State (Same as HomeScreen)
-  const [dropdownVisible, setDropdownVisible] = useState(false);
-  const [btnLayout, setBtnLayout] = useState({ x: 0, y: 0, width: 0, height: 0 });
+  // ✅ About Dropdown State
+  const [aboutDropdownVisible, setAboutDropdownVisible] = useState(false);
+  const [aboutBtnLayout, setAboutBtnLayout] = useState({ x: 0, y: 0, width: 0, height: 0 });
   const aboutBtnRef = useRef<View>(null);
 
-  // ✅ Open Dropdown Function (Same as HomeScreen)
-  const openDropdown = () => {
+  // ✅ Sign In Dropdown State
+  const [signInDropdown, setSignInDropdown] = useState(false);
+  const [dropdownPos, setDropdownPos] = useState({ top: 0, right: 0 });
+  const signInBtnRef = useRef<TouchableOpacity>(null);
+
+  // ✅ Login Modal State
+  const [loginModal, setLoginModal] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [termsAccepted, setTermsAccepted] = useState(false);
+
+  // ✅ Open About Dropdown
+  const openAboutDropdown = () => {
     if (aboutBtnRef.current) {
       aboutBtnRef.current.measure((_fx, _fy, width, height, px, py) => {
-        setBtnLayout({ x: px, y: py, width, height });
-        setDropdownVisible(true);
+        setAboutBtnLayout({ x: px, y: py, width, height });
+        setAboutDropdownVisible(true);
       });
     }
+  };
+
+  // ✅ Sign In Dropdown Open
+  const handleSignInPress = () => {
+    if (signInBtnRef.current) {
+      signInBtnRef.current.measure((_fx, _fy, _w, h, px, py) => {
+        setDropdownPos({ top: py + h, right: (typeof window !== 'undefined' ? window.innerWidth : 400) - px - _w });
+        setSignInDropdown(true);
+      });
+    }
+  };
+
+  // ✅ Sign In Dropdown Navigation
+  const handleDropdownNavigate = async (path: string) => {
+    setSignInDropdown(false);
+    if (path === '/signIn') {
+      setLoginModal(true);
+    } else if (path === '/myOrders') {
+      const val = await AsyncStorage.getItem('isLoggedIn');
+      if (val === 'true') {
+        router.push('/myOrders' as any);
+      } else {
+        setLoginModal(true);
+      }
+    } else {
+      router.push(path as any);
+    }
+  };
+
+  // ✅ Login Continue
+  const handleLoginContinue = async () => {
+    if (!termsAccepted || phoneNumber.length < 10) return;
+    await AsyncStorage.setItem('isLoggedIn', 'true');
+    setLoginModal(false);
+    router.push('/myOrders' as any);
   };
 
   return (
     <View style={styles.container}>
 
-      {/* ═══════════ NAVBAR with DROPDOWN ═══════════ */}
+      {/* ═══════════ NAVBAR with BOTH DROPDOWNS ═══════════ */}
       <View style={styles.header}>
         <Image
           source={{ uri: 'https://www.chhayakart.com/cdn/shop/files/ck_logo_white_1.png' }}
@@ -95,12 +143,12 @@ export default function AboutScreen() {
             <Text style={styles.navLink}>Categories</Text>
           </TouchableOpacity>
 
-          {/* ✅ About Us — Dropdown trigger (Same as HomeScreen) */}
+          {/* ✅ About Us Dropdown */}
           <View ref={aboutBtnRef} collapsable={false}>
-            <TouchableOpacity style={styles.aboutBtn} onPress={openDropdown}>
+            <TouchableOpacity style={styles.aboutBtn} onPress={openAboutDropdown}>
               <Text style={[styles.navLink, styles.activeNavLink]}>About Us</Text>
               <Ionicons
-                name={dropdownVisible ? 'chevron-up' : 'chevron-down'}
+                name={aboutDropdownVisible ? 'chevron-up' : 'chevron-down'}
                 size={13}
                 color="white"
                 style={{ marginLeft: 4 }}
@@ -108,47 +156,118 @@ export default function AboutScreen() {
             </TouchableOpacity>
           </View>
 
-          <TouchableOpacity style={styles.navItem}>
+          {/* ✅ Sign In Dropdown */}
+          <TouchableOpacity ref={signInBtnRef} style={styles.navItem} onPress={handleSignInPress}>
             <Text style={styles.navLink}>Sign In</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.cartBtn}>
+          <TouchableOpacity style={styles.cartBtn} onPress={() => router.push('/cart')}>
             <Ionicons name="cart" size={26} color="#000" />
           </TouchableOpacity>
         </View>
       </View>
 
-      {/* ✅ DROPDOWN MODAL (Same as HomeScreen) */}
+      {/* ✅ ABOUT DROPDOWN MODAL */}
       <Modal
-        visible={dropdownVisible}
+        visible={aboutDropdownVisible}
         transparent
         animationType="fade"
-        onRequestClose={() => setDropdownVisible(false)}
+        onRequestClose={() => setAboutDropdownVisible(false)}
       >
-        <Pressable style={styles.backdrop} onPress={() => setDropdownVisible(false)}>
+        <Pressable style={styles.backdrop} onPress={() => setAboutDropdownVisible(false)}>
           <View
             style={[
-              styles.dropdownMenu,
-              { top: btnLayout.y + btnLayout.height + 4, left: btnLayout.x },
+              styles.aboutDropdownMenu,
+              { top: aboutBtnLayout.y + aboutBtnLayout.height + 4, left: aboutBtnLayout.x },
             ]}
           >
             {ABOUT_DROPDOWN.map((item, index) => (
               <TouchableOpacity
                 key={item.label}
                 style={[
-                  styles.dropdownItem,
-                  index < ABOUT_DROPDOWN.length - 1 && styles.dropdownBorder,
+                  styles.aboutDropdownItem,
+                  index < ABOUT_DROPDOWN.length - 1 && styles.aboutDropdownBorder,
                 ]}
                 onPress={() => {
-                  setDropdownVisible(false);
+                  setAboutDropdownVisible(false);
                   router.push(item.route as any);
                 }}
               >
-                <Text style={styles.dropdownText}>{item.label}</Text>
+                <Text style={styles.aboutDropdownText}>{item.label}</Text>
               </TouchableOpacity>
             ))}
           </View>
         </Pressable>
+      </Modal>
+
+      {/* ✅ SIGN IN DROPDOWN MODAL */}
+      <Modal visible={signInDropdown} transparent animationType="fade" onRequestClose={() => setSignInDropdown(false)}>
+        <TouchableWithoutFeedback onPress={() => setSignInDropdown(false)}>
+          <View style={styles.modalOverlay}>
+            <TouchableWithoutFeedback>
+              <View style={[styles.signInDropdown, { top: dropdownPos.top, right: dropdownPos.right }]}>
+                <TouchableOpacity style={styles.dropdownSignInBtn} onPress={() => handleDropdownNavigate('/signIn')}>
+                  <Text style={styles.dropdownSignInText}>Sign In</Text>
+                </TouchableOpacity>
+                <View style={styles.dropdownDivider} />
+                {[
+                  { label: 'Home', path: '/' },
+                  { label: 'My Orders', path: '/myOrders' },
+                  { label: 'My Wishlist', path: '/myWishlist' },
+                  { label: 'CK Wholesale', path: '/kkWholesale' },
+                ].map((item) => (
+                  <TouchableOpacity key={item.label} style={styles.dropdownItem} onPress={() => handleDropdownNavigate(item.path)}>
+                    <Text style={styles.dropdownItemText}>{item.label}</Text>
+                  </TouchableOpacity>
+                ))}
+                <View style={styles.dropdownItem}>
+                  <Text style={styles.dropdownItemText}>
+                    Chhaya Purse{'  '}
+                    <Text style={styles.comingSoonText}>(Coming Soon)</Text>
+                  </Text>
+                </View>
+              </View>
+            </TouchableWithoutFeedback>
+          </View>
+        </TouchableWithoutFeedback>
+      </Modal>
+
+      {/* ✅ LOGIN MODAL */}
+      <Modal visible={loginModal} transparent animationType="fade" onRequestClose={() => setLoginModal(false)}>
+        <TouchableWithoutFeedback onPress={() => setLoginModal(false)}>
+          <View style={styles.loginOverlay}>
+            <TouchableWithoutFeedback>
+              <View style={styles.loginBox}>
+                <Text style={styles.loginTitle}>Login</Text>
+                <TouchableOpacity style={styles.loginCloseBtn} onPress={() => setLoginModal(false)}>
+                  <Ionicons name="close" size={20} color="#333" />
+                </TouchableOpacity>
+                <Image source={{ uri: 'https://www.chhayakart.com/cdn/shop/files/ck_logo_white_1.png' }} style={styles.loginLogo} resizeMode="contain" />
+                <Text style={styles.loginWelcome}>Welcome!</Text>
+                <Text style={styles.loginSubText}>Enter phone number to continue and we will send a verification code to this number.</Text>
+                <View style={styles.loginInputWrapper}>
+                  <View style={styles.loginPhoneRow}>
+                    <Text style={styles.loginCountryCode}>+91</Text>
+                    <TextInput style={styles.loginPhoneInput} keyboardType="phone-pad" maxLength={10} value={phoneNumber} onChangeText={setPhoneNumber} />
+                  </View>
+                </View>
+                <View style={styles.loginTermsRow}>
+                  <TouchableOpacity style={styles.loginCheckboxTouch} onPress={() => setTermsAccepted(!termsAccepted)}>
+                    <View style={[styles.checkboxBox, termsAccepted && styles.checkboxChecked]}>
+                      {termsAccepted && <Ionicons name="checkmark" size={12} color="#fff" />}
+                    </View>
+                  </TouchableOpacity>
+                  <Text style={styles.loginTermsText}>
+                    I Agree to the <Text style={styles.loginLink}>Terms & Condition</Text> and <Text style={styles.loginLink}>Privacy & Policy</Text>
+                  </Text>
+                </View>
+                <TouchableOpacity style={[styles.loginBtn, (!termsAccepted || phoneNumber.length < 10) && styles.loginBtnDisabled]} onPress={handleLoginContinue}>
+                  <Text style={styles.loginBtnText}>Login To Continue</Text>
+                </TouchableOpacity>
+              </View>
+            </TouchableWithoutFeedback>
+          </View>
+        </TouchableWithoutFeedback>
       </Modal>
 
       {/* ═══════════ PAGE CONTENT (UNCHANGED) ═══════════ */}
@@ -166,7 +285,7 @@ export default function AboutScreen() {
         <View style={styles.statsRow}>
           {STATS.map((stat, i) => (
             <View key={i} style={styles.statCard}>
-              <Ionicons name={stat.icon as any} size={28} color="#F36D00" />
+              <Ionicons name={stat.icon as any} size={28} color="#db1c07" />
               <Text style={styles.statValue}>{stat.value}</Text>
               <Text style={styles.statLabel}>{stat.label}</Text>
             </View>
@@ -196,7 +315,7 @@ export default function AboutScreen() {
             {VALUES.map((val, i) => (
               <View key={i} style={styles.valueCard}>
                 <View style={styles.valueIconBox}>
-                  <Ionicons name={val.icon as any} size={28} color="#F36D00" />
+                  <Ionicons name={val.icon as any} size={28} color="#db1c07" />
                 </View>
                 <Text style={styles.valueTitle}>{val.title}</Text>
                 <Text style={styles.valueDesc}>{val.desc}</Text>
@@ -276,7 +395,7 @@ const styles = StyleSheet.create({
 
   /* NAVBAR */
   header: {
-    backgroundColor: '#F36D00',
+    backgroundColor: '#db1c07',
     flexDirection: 'row', alignItems: 'center',
     paddingHorizontal: 24,
     paddingTop: Platform.OS === 'web' ? 0 : 44,
@@ -287,13 +406,13 @@ const styles = StyleSheet.create({
   logo: { width: 52, height: 52 },
   navLinksContainer: { flexDirection: 'row', alignItems: 'center', flex: 1, justifyContent: 'flex-end' },
   navItem: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 14, paddingVertical: 8 },
-  navLink: { color: 'white', fontSize: 14, fontWeight: '600' },
+  navLink: { color: 'white', fontSize: 15, fontWeight: '600' },
   activeNavLink: {
     textDecorationLine: 'underline',
     opacity: 0.85,
   },
   
-  // ✅ About Us Button with Dropdown
+  // About Us Button with Dropdown
   aboutBtn: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -303,9 +422,9 @@ const styles = StyleSheet.create({
   
   cartBtn: { marginLeft: 16, backgroundColor: 'rgba(255,255,255,0.25)', borderRadius: 50, padding: 8 },
 
-  /* ✅ DROPDOWN STYLES (Same as HomeScreen) */
+  /* ABOUT DROPDOWN STYLES */
   backdrop: { flex: 1, backgroundColor: 'transparent' },
-  dropdownMenu: {
+  aboutDropdownMenu: {
     position: 'absolute',
     width: 210,
     backgroundColor: '#fff',
@@ -319,16 +438,104 @@ const styles = StyleSheet.create({
     borderColor: '#f0f0f0',
     zIndex: 1000,
   },
-  dropdownItem: {
+  aboutDropdownItem: {
     paddingVertical: 14,
     paddingHorizontal: 20,
     backgroundColor: '#fff',
   },
-  dropdownBorder: { borderBottomWidth: 1, borderBottomColor: '#f0f0f0' },
-  dropdownText: { fontSize: 14, color: '#333', fontWeight: '500' },
+  aboutDropdownBorder: { borderBottomWidth: 1, borderBottomColor: '#f0f0f0' },
+  aboutDropdownText: { fontSize: 14, color: '#333', fontWeight: '500' },
+
+  /* SIGN IN DROPDOWN STYLES */
+  modalOverlay: { flex: 1, backgroundColor: 'transparent' },
+  signInDropdown: {
+    position: 'absolute',
+    backgroundColor: '#fff',
+    borderRadius: 8,
+    paddingVertical: 12,
+    minWidth: 230,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.15,
+    shadowRadius: 12,
+    elevation: 10,
+    borderWidth: 1,
+    borderColor: '#eee',
+  },
+  dropdownSignInBtn: {
+    backgroundColor: '#db1c07',
+    marginHorizontal: 16,
+    marginBottom: 12,
+    borderRadius: 6,
+    paddingVertical: 12,
+    alignItems: 'center',
+  },
+  dropdownSignInText: { color: '#fff', fontWeight: '700', fontSize: 15 },
+  dropdownDivider: { height: 1, backgroundColor: '#f0f0f0', marginBottom: 8 },
+  dropdownItem: { paddingVertical: 12, paddingHorizontal: 20 },
+  dropdownItemText: { fontSize: 14, color: '#333', fontWeight: '500' },
+  comingSoonText: { color: '#db1c07', fontSize: 12, fontWeight: '400' },
+
+  /* LOGIN MODAL STYLES */
+  loginOverlay: { flex: 1, backgroundColor: 'rgba(0,0,0,0.55)', justifyContent: 'center', alignItems: 'center' },
+  loginBox: {
+    backgroundColor: '#fff',
+    borderRadius: 14,
+    padding: 32,
+    width: Platform.OS === 'web' ? 450 : '90%',
+    maxWidth: 580,
+    alignItems: 'center',
+    position: 'relative',
+  },
+  loginTitle: { alignSelf: 'flex-start', fontSize: 18, fontWeight: '700', color: '#222', marginBottom: 24 },
+  loginCloseBtn: {
+    position: 'absolute',
+    top: 16,
+    right: 16,
+    width: 34,
+    height: 34,
+    borderRadius: 17,
+    borderWidth: 1.5,
+    borderColor: '#ddd',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  loginLogo: { width: 80, height: 80, marginBottom: 18 },
+  loginWelcome: { fontSize: 22, fontWeight: '700', color: '#222', marginBottom: 8 },
+  loginSubText: { fontSize: 13, color: '#777', textAlign: 'center', marginBottom: 28, lineHeight: 20, paddingHorizontal: 10 },
+  loginInputWrapper: {
+    width: '100%',
+    borderWidth: 1.5,
+    borderColor: '#ddd',
+    borderRadius: 8,
+    marginBottom: 18,
+    overflow: 'hidden',
+    backgroundColor: '#f7f7f7',
+  },
+  loginPhoneRow: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 16, height: 54 },
+  loginCountryCode: { fontSize: 16, color: '#333', marginRight: 10, fontWeight: '500' },
+  loginPhoneInput: { flex: 1, fontSize: 16, color: '#333', height: '100%' },
+  loginTermsRow: { flexDirection: 'row', alignItems: 'center', alignSelf: 'flex-start', marginBottom: 28, gap: 10 },
+  loginCheckboxTouch: { padding: 2 },
+  checkboxBox: {
+    width: 18,
+    height: 18,
+    borderWidth: 1.5,
+    borderColor: '#aaa',
+    borderRadius: 3,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#fff',
+  },
+  checkboxChecked: { backgroundColor: '#4CAF86', borderColor: '#4CAF86' },
+  loginTermsText: { fontSize: 13, color: '#444', flexShrink: 1 },
+  loginLink: { color: '#2E8B57', fontWeight: '600' },
+  loginBtn: { backgroundColor: '#4CAF86', width: '100%', height: 54, borderRadius: 8, alignItems: 'center', justifyContent: 'center' },
+  loginBtnDisabled: { backgroundColor: '#92D4B5' },
+  loginBtnText: { color: '#fff', fontSize: 16, fontWeight: '700', letterSpacing: 0.5 },
 
   /* HERO */
-  heroBanner: { backgroundColor: '#F36D00', paddingVertical: 40, paddingHorizontal: 30, alignItems: 'center' },
+  heroBanner: { backgroundColor: '#db1c07', paddingVertical: 40, paddingHorizontal: 30, alignItems: 'center' },
   heroTitle: { fontSize: 32, fontWeight: '800', color: 'white', textAlign: 'center', marginBottom: 12 },
   heroSubtitle: { fontSize: 15, color: 'rgba(255,255,255,0.9)', textAlign: 'center', lineHeight: 23, maxWidth: 500 },
 
@@ -345,7 +552,7 @@ const styles = StyleSheet.create({
   /* SECTIONS */
   section: { backgroundColor: '#fff', marginTop: 12, paddingVertical: 28, paddingHorizontal: 28 },
   sectionTitle: { fontSize: 22, fontWeight: '700', color: '#1a1a1a', marginBottom: 6 },
-  sectionUnderline: { width: 50, height: 3, backgroundColor: '#F36D00', borderRadius: 2, marginBottom: 20 },
+  sectionUnderline: { width: 50, height: 3, backgroundColor: '#db1c07', borderRadius: 2, marginBottom: 20 },
   storyText: { fontSize: 15, color: '#444', lineHeight: 25, marginBottom: 14 },
 
   /* VALUES */
@@ -358,7 +565,7 @@ const styles = StyleSheet.create({
   /* TEAM */
   teamRow: { flexDirection: 'row', justifyContent: 'space-around', flexWrap: 'wrap', gap: 16 },
   teamCard: { alignItems: 'center', width: 140 },
-  teamAvatar: { width: 90, height: 90, borderRadius: 45, marginBottom: 10, borderWidth: 3, borderColor: '#F36D00' },
+  teamAvatar: { width: 90, height: 90, borderRadius: 45, marginBottom: 10, borderWidth: 3, borderColor: '#db1c07' },
   teamName: { fontSize: 14, fontWeight: '700', color: '#222', textAlign: 'center' },
   teamRole: { fontSize: 12, color: '#888', marginTop: 3, textAlign: 'center' },
 
@@ -376,5 +583,5 @@ const styles = StyleSheet.create({
   socialIcon: { width: 36, height: 36, borderRadius: 18, backgroundColor: '#444', justifyContent: 'center', alignItems: 'center' },
   copyright: { backgroundColor: '#222', paddingVertical: 14, alignItems: 'center' },
   copyrightText: { color: '#888', fontSize: 13 },
-  copyrightBrand: { color: '#F36D00', fontWeight: '700' },
+  copyrightBrand: { color: '#db1c07', fontWeight: '700' },
 });

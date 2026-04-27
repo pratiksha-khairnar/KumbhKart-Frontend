@@ -1,21 +1,24 @@
-import { Ionicons } from '@expo/vector-icons';
-import { useRouter } from 'expo-router';
-import React, { useRef, useState } from 'react';
+import { FontAwesome, Ionicons } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useLocalSearchParams, useRouter } from 'expo-router';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Dimensions,
   Image,
   ImageBackground,
   Modal,
+  Platform,
   Pressable,
   ScrollView,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
-  View,
+  TouchableWithoutFeedback,
+  View
 } from 'react-native';
 
-// Sahi Path ka use:
+// Cart Drawer
 import CartDrawer from './components/Add_to_Cart';
 
 const { width } = Dimensions.get('window');
@@ -27,17 +30,32 @@ const CAT_W = Math.floor(
   (width - CONTAINER_PADDING * 2 - ITEM_GAP * (ITEMS_PER_ROW - 1)) / ITEMS_PER_ROW
 );
 
+// ✅ About Dropdown Items (Same as SubCategoryScreen)
+const ABOUT_DROPDOWN = [
+  { label: 'About Us',           route: '/about' },
+  { label: 'Blog',               route: '/blog' },
+  { label: 'Contact Us',         route: '/contact' },
+  { label: 'Terms & Conditions', route: '/terms' },
+  { label: 'Privacy Policy',     route: '/privacy' },
+  { label: 'Return & Refund',    route: '/refund' },
+];
+
 const Home = () => {
   const router = useRouter();
   const params = useLocalSearchParams();
 
   const [signInDropdown, setSignInDropdown] = useState(false);
   const [dropdownPos, setDropdownPos] = useState({ top: 0, right: 0 });
+  
+  // ✅ About Dropdown State
+  const [aboutDropdownVisible, setAboutDropdownVisible] = useState(false);
+  const [aboutBtnLayout, setAboutBtnLayout] = useState({ x: 0, y: 0, width: 0, height: 0 });
+  const aboutBtnRef = useRef<View>(null);
+  
   const [loginModal, setLoginModal] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState('');
   const [termsAccepted, setTermsAccepted] = useState(false);
   
-  // Cart state
   const [cartVisible, setCartVisible] = useState(false);
 
   const signInBtnRef = useRef<TouchableOpacity>(null);
@@ -47,6 +65,18 @@ const Home = () => {
       setLoginModal(true);
     }
   }, [params?.login]);
+
+  // ✅ About Dropdown Open Function (Same as SubCategoryScreen)
+  const openAboutDropdown = () => {
+    if (aboutBtnRef.current) {
+      aboutBtnRef.current.measureInWindow((x, y, width, height) => {
+        setAboutBtnLayout({ x, y, width, height });
+        setAboutDropdownVisible(true);
+      });
+    } else {
+      setAboutDropdownVisible(true);
+    }
+  };
 
   const categories = [
     { name: 'PAPAD', img: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=200' },
@@ -109,10 +139,19 @@ const Home = () => {
           key={index}
           style={[styles.card, { width: CAT_W }]}
           activeOpacity={0.8}
-          onPress={() => router.push({ pathname: '/sub-category/[id]', params: { id: item.name } })}
+          onPress={() => {
+            router.push({
+              pathname: '/sub-category/[id]',
+              params: { id: item.name }
+            });
+          }}
         >
           <View style={[styles.catBox, { width: CAT_W, height: CAT_W }]}>
-            <Image source={item.img} style={styles.catImage} contentFit="contain" transition={200} />
+            <Image 
+              source={{ uri: item.img }} 
+              style={styles.catImage} 
+              resizeMode="contain" 
+            />
           </View>
           <Text style={styles.catLabel} numberOfLines={1}>{item.name}</Text>
         </TouchableOpacity>
@@ -123,12 +162,12 @@ const Home = () => {
   return (
     <View style={{ flex: 1 }}>
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-        {/* HEADER SECTION */}
+        {/* HEADER */}
         <View style={styles.header}>
           <Image
             source={{ uri: 'https://www.chhayakart.com/cdn/shop/files/ck_logo_white_1.png' }}
             style={styles.logo}
-            contentFit="contain"
+            resizeMode="contain"
           />
           <View style={styles.navLinksContainer}>
             <TouchableOpacity style={styles.navItem} onPress={() => router.push('/')}>
@@ -142,40 +181,69 @@ const Home = () => {
               <Text style={styles.navLink}>Categories</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.navItem}>
-              <Text style={styles.navLink}>About Us</Text>
-            </TouchableOpacity>
+            {/* ✅ About Us with Dropdown (Same as SubCategoryScreen) */}
+            <View ref={aboutBtnRef} collapsable={false}>
+              <TouchableOpacity style={styles.aboutBtn} onPress={openAboutDropdown}>
+                <Text style={styles.navLink}>About Us</Text>
+                <Ionicons
+                  name={aboutDropdownVisible ? 'chevron-up' : 'chevron-down'}
+                  size={13}
+                  color="white"
+                  style={{ marginLeft: 4 }}
+                />
+              </TouchableOpacity>
+            </View>
 
-            <TouchableOpacity
-              ref={signInBtnRef}
-              style={styles.navItem}
-              onPress={handleSignInPress}
-            >
+            <TouchableOpacity ref={signInBtnRef} style={styles.navItem} onPress={handleSignInPress}>
               <Text style={styles.navLink}>Sign In</Text>
             </TouchableOpacity>
 
-            {/* Cart Button click par cart open hoga */}
             <TouchableOpacity style={styles.cartBtn} onPress={() => setCartVisible(true)}>
               <Ionicons name="cart" size={26} color="#000" />
             </TouchableOpacity>
           </View>
         </View>
 
-        {/* SIGN IN DROPDOWN MODAL */}
+        {/* ✅ ABOUT DROPDOWN MODAL (Same as SubCategoryScreen) */}
         <Modal
-          visible={signInDropdown}
+          visible={aboutDropdownVisible}
           transparent
           animationType="fade"
-          onRequestClose={() => setSignInDropdown(false)}
+          onRequestClose={() => setAboutDropdownVisible(false)}
         >
+          <Pressable style={styles.backdrop} onPress={() => setAboutDropdownVisible(false)}>
+            <View
+              style={[
+                styles.aboutDropdownMenu,
+                { top: aboutBtnLayout.y + aboutBtnLayout.height + 4, left: aboutBtnLayout.x },
+              ]}
+            >
+              {ABOUT_DROPDOWN.map((item, index) => (
+                <TouchableOpacity
+                  key={item.label}
+                  style={[
+                    styles.aboutDropdownItem,
+                    index < ABOUT_DROPDOWN.length - 1 && styles.aboutDropdownBorder,
+                  ]}
+                  onPress={() => {
+                    setAboutDropdownVisible(false);
+                    router.push(item.route as any);
+                  }}
+                >
+                  <Text style={styles.aboutDropdownText}>{item.label}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+          </Pressable>
+        </Modal>
+
+        {/* SIGN IN DROPDOWN MODAL */}
+        <Modal visible={signInDropdown} transparent animationType="fade" onRequestClose={() => setSignInDropdown(false)}>
           <TouchableWithoutFeedback onPress={() => setSignInDropdown(false)}>
             <View style={styles.modalOverlay}>
               <TouchableWithoutFeedback>
                 <View style={[styles.dropdown, { top: dropdownPos.top, right: dropdownPos.right }]}>
-                  <TouchableOpacity
-                    style={styles.dropdownSignInBtn}
-                    onPress={() => handleDropdownNavigate('/signIn')}
-                  >
+                  <TouchableOpacity style={styles.dropdownSignInBtn} onPress={() => handleDropdownNavigate('/signIn')}>
                     <Text style={styles.dropdownSignInText}>Sign In</Text>
                   </TouchableOpacity>
                   <View style={styles.dropdownDivider} />
@@ -185,11 +253,7 @@ const Home = () => {
                     { label: 'My Wishlist', path: '/myWishlist' },
                     { label: 'CK Wholesale', path: '/kkWholesale' },
                   ].map((item) => (
-                    <TouchableOpacity
-                      key={item.label}
-                      style={styles.dropdownItem}
-                      onPress={() => handleDropdownNavigate(item.path)}
-                    >
+                    <TouchableOpacity key={item.label} style={styles.dropdownItem} onPress={() => handleDropdownNavigate(item.path)}>
                       <Text style={styles.dropdownItemText}>{item.label}</Text>
                     </TouchableOpacity>
                   ))}
@@ -206,12 +270,7 @@ const Home = () => {
         </Modal>
 
         {/* LOGIN MODAL */}
-        <Modal
-          visible={loginModal}
-          transparent
-          animationType="fade"
-          onRequestClose={() => setLoginModal(false)}
-        >
+        <Modal visible={loginModal} transparent animationType="fade" onRequestClose={() => setLoginModal(false)}>
           <TouchableWithoutFeedback onPress={() => setLoginModal(false)}>
             <View style={styles.loginOverlay}>
               <TouchableWithoutFeedback>
@@ -220,32 +279,17 @@ const Home = () => {
                   <TouchableOpacity style={styles.loginCloseBtn} onPress={() => setLoginModal(false)}>
                     <Ionicons name="close" size={20} color="#333" />
                   </TouchableOpacity>
-                  <Image
-                    source={{ uri: 'https://www.chhayakart.com/cdn/shop/files/ck_logo_white_1.png' }}
-                    style={styles.loginLogo}
-                    contentFit="contain"
-                  />
+                  <Image source={{ uri: 'https://www.chhayakart.com/cdn/shop/files/ck_logo_white_1.png' }} style={styles.loginLogo} resizeMode="contain" />
                   <Text style={styles.loginWelcome}>Welcome!</Text>
-                  <Text style={styles.loginSubText}>
-                    Enter phone number to continue and we will send a verification code to this number.
-                  </Text>
+                  <Text style={styles.loginSubText}>Enter phone number to continue and we will send a verification code to this number.</Text>
                   <View style={styles.loginInputWrapper}>
                     <View style={styles.loginPhoneRow}>
                       <Text style={styles.loginCountryCode}>+91</Text>
-                      <TextInput
-                        style={styles.loginPhoneInput}
-                        keyboardType="phone-pad"
-                        maxLength={10}
-                        value={phoneNumber}
-                        onChangeText={setPhoneNumber}
-                      />
+                      <TextInput style={styles.loginPhoneInput} keyboardType="phone-pad" maxLength={10} value={phoneNumber} onChangeText={setPhoneNumber} />
                     </View>
                   </View>
                   <View style={styles.loginTermsRow}>
-                    <TouchableOpacity
-                      style={styles.loginCheckboxTouch}
-                      onPress={() => setTermsAccepted(!termsAccepted)}
-                    >
+                    <TouchableOpacity style={styles.loginCheckboxTouch} onPress={() => setTermsAccepted(!termsAccepted)}>
                       <View style={[styles.checkboxBox, termsAccepted && styles.checkboxChecked]}>
                         {termsAccepted && <Ionicons name="checkmark" size={12} color="#fff" />}
                       </View>
@@ -254,10 +298,7 @@ const Home = () => {
                       I Agree to the <Text style={styles.loginLink}>Terms & Condition</Text> and <Text style={styles.loginLink}>Privacy & Policy</Text>
                     </Text>
                   </View>
-                  <TouchableOpacity
-                    style={[styles.loginBtn, (!termsAccepted || phoneNumber.length < 10) && styles.loginBtnDisabled]}
-                    onPress={handleLoginContinue}
-                  >
+                  <TouchableOpacity style={[styles.loginBtn, (!termsAccepted || phoneNumber.length < 10) && styles.loginBtnDisabled]} onPress={handleLoginContinue}>
                     <Text style={styles.loginBtnText}>Login To Continue</Text>
                   </TouchableOpacity>
                 </View>
@@ -268,21 +309,14 @@ const Home = () => {
 
         {/* HERO SECTION */}
         <View style={styles.heroWrapper}>
-          <ImageBackground
-            source={{ uri: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=1200&q=80' }}
-            style={styles.heroBg}
-          >
+          <ImageBackground source={{ uri: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=1200&q=80' }} style={styles.heroBg} resizeMode="cover">
             <View style={styles.heroOverlay}>
               <Text style={styles.heroSubText}>Empowering Rural India Through Authentic Flavors</Text>
               <View style={styles.searchBar}>
                 <View style={styles.allIndiaBox}>
                   <Text style={styles.allIndiaText}>All India</Text>
                 </View>
-                <TextInput
-                  style={styles.searchInput}
-                  placeholder="Search 1000+ Traditional Products"
-                  placeholderTextColor="#999"
-                />
+                <TextInput style={styles.searchInput} placeholder="Search 1000+ Traditional Products" placeholderTextColor="#999" />
                 <TouchableOpacity style={styles.searchButton}>
                   <Text style={styles.searchButtonText}>Search</Text>
                 </TouchableOpacity>
@@ -291,12 +325,10 @@ const Home = () => {
           </ImageBackground>
         </View>
 
-        {/* FREE DELIVERY BAR */}
         <View style={styles.deliveryBar}>
           <Text style={styles.deliveryText}>FREE DELIVERY FOR ALL PRODUCTS 🚚</Text>
         </View>
 
-        {/* SHOP BY CATEGORY */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>SHOP BY CATEGORY</Text>
           <View style={styles.divider} />
@@ -305,7 +337,6 @@ const Home = () => {
           </View>
         </View>
 
-        {/* SEASONAL TREND */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>SEASONAL TREND</Text>
           <View style={styles.divider} />
@@ -357,11 +388,7 @@ const Home = () => {
         </View>
       </ScrollView>
 
-      {/* ADD TO CART DRAWER */}
-      <CartDrawer 
-        visible={cartVisible} 
-        onClose={() => setCartVisible(false)} 
-      />
+      <CartDrawer visible={cartVisible} onClose={() => setCartVisible(false)} />
     </View>
   );
 };
@@ -370,105 +397,54 @@ export default Home;
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#fff' },
-
-  header: {
-    backgroundColor: '#db1c07',
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 32,
-    paddingTop: Platform.OS === 'web' ? 0 : 44,
-    height: Platform.OS === 'web' ? 76 : 116,
-    justifyContent: 'space-between',
-    zIndex: 100,
-  },
+  header: { backgroundColor: '#db1c07', flexDirection: 'row', alignItems: 'center', paddingHorizontal: 32, paddingTop: Platform.OS === 'web' ? 0 : 44, height: Platform.OS === 'web' ? 76 : 116, justifyContent: 'space-between' },
   logo: { width: 56, height: 56 },
   navLinksContainer: { flexDirection: 'row', alignItems: 'center', flex: 1, justifyContent: 'flex-end' },
   navItem: { paddingHorizontal: 18, paddingVertical: 8 },
   navLink: { color: 'white', fontSize: 15, fontWeight: '600' },
+  aboutBtn: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 18, paddingVertical: 8 },
   cartBtn: { marginLeft: 24, backgroundColor: 'rgba(255,255,255,0.25)', borderRadius: 50, padding: 8 },
-  modalOverlay: { flex: 1, backgroundColor: 'transparent' },
-  dropdown: {
+  
+  // ✅ About Dropdown Styles
+  backdrop: { flex: 1, backgroundColor: 'rgba(0,0,0,0.3)' },
+  aboutDropdownMenu: {
     position: 'absolute',
     backgroundColor: '#fff',
     borderRadius: 8,
-    paddingVertical: 12,
-    minWidth: 230,
+    width: 200,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.15,
-    shadowRadius: 12,
-    elevation: 10,
-    borderWidth: 1,
-    borderColor: '#eee',
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    elevation: 5,
+    overflow: 'hidden',
   },
-  dropdownSignInBtn: {
-    backgroundColor: '#db1c07',
-    marginHorizontal: 16,
-    marginBottom: 12,
-    borderRadius: 6,
-    paddingVertical: 12,
-    alignItems: 'center',
-  },
+  aboutDropdownItem: { paddingVertical: 12, paddingHorizontal: 16 },
+  aboutDropdownBorder: { borderBottomWidth: 1, borderBottomColor: '#eee' },
+  aboutDropdownText: { fontSize: 14, color: '#222' },
+  
+  modalOverlay: { flex: 1, backgroundColor: 'transparent' },
+  dropdown: { position: 'absolute', backgroundColor: '#fff', borderRadius: 8, paddingVertical: 12, minWidth: 230, shadowColor: '#000', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.15, shadowRadius: 12, elevation: 10, borderWidth: 1, borderColor: '#eee' },
+  dropdownSignInBtn: { backgroundColor: '#db1c07', marginHorizontal: 16, marginBottom: 12, borderRadius: 6, paddingVertical: 12, alignItems: 'center' },
   dropdownSignInText: { color: '#fff', fontWeight: '700', fontSize: 15 },
   dropdownDivider: { height: 1, backgroundColor: '#f0f0f0', marginBottom: 8 },
   dropdownItem: { paddingVertical: 12, paddingHorizontal: 20 },
   dropdownItemText: { fontSize: 14, color: '#333', fontWeight: '500' },
   comingSoonText: { color: '#db1c07', fontSize: 12, fontWeight: '400' },
-  loginOverlay: {
-    flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.55)',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  loginBox: {
-    backgroundColor: '#fff',
-    borderRadius: 14,
-    padding: 32,
-    width: Platform.OS === 'web' ? width * 0.45 : width * 0.9,
-    maxWidth: 580,
-    alignItems: 'center',
-    position: 'relative',
-  },
+  loginOverlay: { flex: 1, backgroundColor: 'rgba(0,0,0,0.55)', justifyContent: 'center', alignItems: 'center' },
+  loginBox: { backgroundColor: '#fff', borderRadius: 14, padding: 32, width: Platform.OS === 'web' ? width * 0.45 : width * 0.9, maxWidth: 580, alignItems: 'center', position: 'relative' },
   loginTitle: { alignSelf: 'flex-start', fontSize: 18, fontWeight: '700', color: '#222', marginBottom: 24 },
-  loginCloseBtn: {
-    position: 'absolute',
-    top: 16,
-    right: 16,
-    width: 34,
-    height: 34,
-    borderRadius: 17,
-    borderWidth: 1.5,
-    borderColor: '#ddd',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+  loginCloseBtn: { position: 'absolute', top: 16, right: 16, width: 34, height: 34, borderRadius: 17, borderWidth: 1.5, borderColor: '#ddd', alignItems: 'center', justifyContent: 'center' },
   loginLogo: { width: 80, height: 80, marginBottom: 18 },
   loginWelcome: { fontSize: 22, fontWeight: '700', color: '#222', marginBottom: 8 },
   loginSubText: { fontSize: 13, color: '#777', textAlign: 'center', marginBottom: 28, lineHeight: 20, paddingHorizontal: 10 },
-  loginInputWrapper: {
-    width: '100%',
-    borderWidth: 1.5,
-    borderColor: '#ddd',
-    borderRadius: 8,
-    marginBottom: 18,
-    overflow: 'hidden',
-    backgroundColor: '#f7f7f7',
-  },
+  loginInputWrapper: { width: '100%', borderWidth: 1.5, borderColor: '#ddd', borderRadius: 8, marginBottom: 18, overflow: 'hidden', backgroundColor: '#f7f7f7' },
   loginPhoneRow: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 16, height: 54 },
   loginCountryCode: { fontSize: 16, color: '#333', marginRight: 10, fontWeight: '500' },
   loginPhoneInput: { flex: 1, fontSize: 16, color: '#333', height: '100%' },
   loginTermsRow: { flexDirection: 'row', alignItems: 'center', alignSelf: 'flex-start', marginBottom: 28, gap: 10 },
   loginCheckboxTouch: { padding: 2 },
-  checkboxBox: {
-    width: 18,
-    height: 18,
-    borderWidth: 1.5,
-    borderColor: '#aaa',
-    borderRadius: 3,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#fff',
-  },
+  checkboxBox: { width: 18, height: 18, borderWidth: 1.5, borderColor: '#aaa', borderRadius: 3, alignItems: 'center', justifyContent: 'center', backgroundColor: '#fff' },
   checkboxChecked: { backgroundColor: '#4CAF86', borderColor: '#4CAF86' },
   loginTermsText: { fontSize: 13, color: '#444', flexShrink: 1 },
   loginLink: { color: '#2E8B57', fontWeight: '600' },
