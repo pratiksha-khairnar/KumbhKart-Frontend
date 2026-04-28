@@ -14,10 +14,6 @@ import {
   View,
 } from 'react-native';
 import app from "../../firebase/config/firebaseConfig";
-<<<<<<< HEAD
-
-=======
->>>>>>> 49315eee6efac569d2dc9239ba360c3aafaaedb0
 console.log("Firebase app:", app);
 
 const { width } = Dimensions.get('window');
@@ -77,7 +73,7 @@ const Home = () => {
 
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      {/* HEADER SECTION - NO CHANGES */}
+      {/* HEADER SECTION */}
       <View style={styles.header}>
         <Image source={{ uri: 'https://www.chhayakart.com/cdn/shop/files/ck_logo_white_1.png' }} style={styles.logo} contentFit="contain" />
         <View style={styles.navLinksContainer}>
@@ -89,13 +85,12 @@ const Home = () => {
         </View>
       </View>
 
-      {/* HERO SECTION - SEARCH BAR UPDATED */}
+      {/* HERO SECTION */}
       <View style={styles.heroWrapper}>
         <ImageBackground source={{ uri: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=1200&q=80' }} style={styles.heroBg}>
           <View style={styles.heroOverlay}>
             <Text style={styles.heroSubText}>Empowering Rural India Through Authentic Flavors</Text>
             
-            {/* Updated Search Bar Layout */}
             <View style={styles.searchBar}>
               <View style={styles.allIndiaBox}>
                 <Text style={styles.allIndiaText}>All India</Text>
@@ -138,42 +133,41 @@ const Home = () => {
         <View style={styles.footerTaglineBox}>
           <Text style={styles.footerTagline}>Chhayakart: Empowered Minds, Flourishing Enterprises</Text>
         </View>
-        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', padding: '30px', flexWrap: 'wrap' }}>
-            <View style={styles.footerCol}>
-              <Text style={styles.footerHead}>Get In Touch</Text>
-              <Text style={styles.footerText}>Plot No. 21, ZP Colony, Deopur, Dhule 424005</Text>
-              <View style={styles.socialRow}>
-                <FontAwesome name="facebook-square" size={20} color="white" style={styles.socialIcon} />
-                <FontAwesome name="instagram" size={20} color="white" style={styles.socialIcon} />
-                <FontAwesome name="linkedin-square" size={20} color="white" style={styles.socialIcon} />
-              </View>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 30, flexWrap: 'wrap' }}>
+          <View style={styles.footerCol}>
+            <Text style={styles.footerHead}>Get In Touch</Text>
+            <Text style={styles.footerText}>Plot No. 21, ZP Colony, Deopur, Dhule 424005</Text>
+            <View style={styles.socialRow}>
+              <FontAwesome name="facebook-square" size={20} color="white" style={styles.socialIcon} />
+              <FontAwesome name="instagram" size={20} color="white" style={styles.socialIcon} />
+              <FontAwesome name="linkedin-square" size={20} color="white" style={styles.socialIcon} />
             </View>
-            {/* ... other columns stay the same ... */}
-            <View style={styles.footerCol}>
-                <Text style={styles.footerHead}>Categories</Text>
-                <Text style={styles.footerLink}>Season Special</Text>
-                <Text style={styles.footerLink}>Instant Food</Text>
-                <Text style={styles.footerLink}>Millet Superfood</Text>
-            </View>
-            <View style={styles.footerCol}>
-                <Text style={styles.footerHead}>Essentials</Text>
-                <Text style={styles.footerLink}>Cookies</Text>
-                <Text style={styles.footerLink}>Fitness Food</Text>
-                <Text style={styles.footerLink}>Mom's Essential</Text>
-            </View>
-            <View style={styles.footerCol}>
-                <Text style={styles.footerHead}>Chatpata</Text>
-                <Text style={styles.footerLink}>Snacks & Namkeen</Text>
-                <Text style={styles.footerLink}>Chutney & Masala</Text>
-                <Text style={styles.footerLink}>Pickles</Text>
-            </View>
-            <View style={styles.footerCol}>
-                <Text style={styles.footerHead}>Quick Links</Text>
-                <Text style={styles.footerLink}>About Us</Text>
-                <Text style={styles.footerLink}>Blog</Text>
-                <Text style={styles.footerLink}>Return & Refund</Text>
-            </View>
-        </div>
+          </View>
+          <View style={styles.footerCol}>
+            <Text style={styles.footerHead}>Categories</Text>
+            <Text style={styles.footerLink}>Season Special</Text>
+            <Text style={styles.footerLink}>Instant Food</Text>
+            <Text style={styles.footerLink}>Millet Superfood</Text>
+          </View>
+          <View style={styles.footerCol}>
+            <Text style={styles.footerHead}>Essentials</Text>
+            <Text style={styles.footerLink}>Cookies</Text>
+            <Text style={styles.footerLink}>Fitness Food</Text>
+            <Text style={styles.footerLink}>Mom's Essential</Text>
+          </View>
+          <View style={styles.footerCol}>
+            <Text style={styles.footerHead}>Chatpata</Text>
+            <Text style={styles.footerLink}>Snacks & Namkeen</Text>
+            <Text style={styles.footerLink}>Chutney & Masala</Text>
+            <Text style={styles.footerLink}>Pickles</Text>
+          </View>
+          <View style={styles.footerCol}>
+            <Text style={styles.footerHead}>Quick Links</Text>
+            <Text style={styles.footerLink}>About Us</Text>
+            <Text style={styles.footerLink}>Blog</Text>
+            <Text style={styles.footerLink}>Return & Refund</Text>
+          </View>
+        </View>
       </View>
     </ScrollView>
   );
@@ -194,7 +188,6 @@ const styles = StyleSheet.create({
   heroOverlay: { flex: 1, backgroundColor: 'rgba(0,0,0,0.4)', justifyContent: 'center', alignItems: 'center', paddingHorizontal: 20 },
   heroSubText: { color: 'white', fontSize: 14, textAlign: 'center', marginBottom: 12, fontWeight: '700' },
   
-  // UPDATED SEARCH BAR STYLES
   searchBar: { 
     flexDirection: 'row', 
     backgroundColor: 'white', 
