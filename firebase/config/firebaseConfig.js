@@ -1,9 +1,11 @@
 
+// 📁 firebase/firebaseConfig.ts
+// ✅ Yahan apna Firebase project ka config paste karo
 
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { getApp, getApps, initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
+import { getStorage } from 'firebase/storage';
 
-// ✅ Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyAO1N2NbpibiXRfbToMb2F_6_7_XZeIjBg",
   authDomain: "kumbh-kart.firebaseapp.com",
@@ -14,6 +16,10 @@ const firebaseConfig = {
   measurementId: "G-9XDEGF0JBC"
 };
 
-const app = initializeApp(firebaseConfig);
+
+// App already initialized hoti hai toh duplicate avoid karo
+const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
+
 export const db = getFirestore(app);
+export const storage = getStorage(app);
 export default app;
