@@ -180,7 +180,7 @@ export default Home;
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#fff' },
-  header: { backgroundColor: '#F36D00', flexDirection: 'row', alignItems: 'center', paddingHorizontal: 32, paddingTop: Platform.OS === 'web' ? 0 : 44, height: Platform.OS === 'web' ? 76 : 116, justifyContent: 'space-between' },
+  header: { backgroundColor: '#db1c07', flexDirection: 'row', alignItems: 'center', paddingHorizontal: 32, paddingTop: Platform.OS === 'web' ? 0 : 44, height: Platform.OS === 'web' ? 76 : 116, justifyContent: 'space-between' },
   logo: { width: 56, height: 56 },
   navLinksContainer: { flexDirection: 'row', alignItems: 'center', flex: 1, justifyContent: 'flex-end' },
   navItem: { paddingHorizontal: 18, paddingVertical: 8 },
@@ -222,14 +222,14 @@ const styles = StyleSheet.create({
     color: '#333'
   },
   searchButton: { 
-    backgroundColor: '#f36d00', 
+    backgroundColor: '#db1c07', 
     paddingHorizontal: 20, 
     justifyContent: 'center',
     height: '100%'
   },
   searchButtonText: { color: 'white', fontWeight: 'bold', fontSize: 13 },
 
-  deliveryBar: { backgroundColor: '#f36d00', padding: 8, alignItems: 'center' },
+  deliveryBar: { backgroundColor: '#db1c07', padding: 8, alignItems: 'center' },
   deliveryText: { color: 'white', fontWeight: 'bold', fontSize: 14 },
   section: { marginTop: 30 },
   sectionTitle: { fontSize: 18, color: '#333', fontWeight: '700', marginLeft: CONTAINER_PADDING, marginBottom: 8 },
