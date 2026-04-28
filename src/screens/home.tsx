@@ -13,6 +13,9 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import app from "../../firebase/config/firebaseConfig";
+
+console.log("Firebase app:", app);
 
 const { width } = Dimensions.get('window');
 
