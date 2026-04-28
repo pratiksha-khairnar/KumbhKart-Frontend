@@ -14,7 +14,10 @@ import {
   View,
 } from 'react-native';
 import app from "../../firebase/config/firebaseConfig";
+<<<<<<< HEAD
 
+=======
+>>>>>>> 49315eee6efac569d2dc9239ba360c3aafaaedb0
 console.log("Firebase app:", app);
 
 const { width } = Dimensions.get('window');
